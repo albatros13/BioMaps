@@ -1,0 +1,39 @@
+\begin{thebibliography}{1}
+
+\bibitem{JS91}
+Johnson, B., Shneiderman, B.:
+\newblock Tree-maps: a space-filling approach to the visualization of
+  hierarchical information structures.
+\newblock In: Proc. of the 2nd Conference on Visualization '91, IEEE (1991)
+  284--291
+
+\bibitem{BL07}
+Blanch, R., Lecolinet, E.:
+\newblock Browsing zoomable treemaps: Structure-aware multi-scale navigation
+  techniques.
+\newblock TVCG \textbf{13} (2007)  1248--1253
+
+\bibitem{BGS12}
+de~Bono, B., Grenon, P., Sammut, S.:
+\newblock Apinatomy: A novel toolkit for visualizing multiscale anatomy
+  schematics with phenotype-related information.
+\newblock Hum Mutat \textbf{33}(5) (2012)  837--848
+
+\bibitem{BD06}
+M.Burch, S.:
+\newblock Trees in a treemap: Visualizing multiple hierarchies.
+\newblock In: Proc. VDA 2006. (2006)
+
+\bibitem{Hol06}
+Holten, D.:
+\newblock Hierarchical edge bundles: Visualization of adjacency relations in
+  hierarchical data.
+\newblock IEEE Transactions on Visualization and Computer Graphics
+  \textbf{12}(5) (2006)  741--748
+
+\bibitem{HW09}
+Holten, D., van Wijk, J.J.:
+\newblock Force-directed edge bundling for graph visualization.
+\newblock Comput. Graph. Forum \textbf{28}(3) (2009)  983--990
+
+\end{thebibliography}

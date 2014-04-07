@@ -1,0 +1,21 @@
+\section{Related work}
+\label{sect:relatedWork}
+
+%Visualizing (biomedical) ontologies
+de Bono et al.~\cite{BGS12} describes limitations of existing treemapping tools for biomedical data visualization. In~\cite{} we introduced a generic method to build custom templates which was applied in this paper to control layout of ApiNATOMY body tissues.
+
+Cardiovascular GO Annotation Initiative \url{http://www.geneontology.org/GO.cardio.shtml}
+
+3D Multiscale Physiological Human \url{http://www.springer.com/computer/image+processing/book/978-1-4471-6274-2}
+
+%Connectivity data
+Burch and Diehl~\cite{BD06} discuss the ways to display multiple hierarchies and conclude that overlaying connectors on top of treemaps is the most visually attractive and easy to follow approach. Among the alternative options they considered are separate, linked and colored tree diagrams, sorted and unsorted matrices and sorted parallel coordinate views. Regarding the way to layout the connectors, two naive methods were considered: straight connections and orthogonal connections.
+
+Our application requires multiple taxonomies consisting of thousands of items to be displayed on relatively small screens of handhold devices. We employ the same visualization technique with more advanced treemapping and connector layout algorithms. Due to the large amount of vascular connectivity data, we employ hierarchical edge bundling method~\cite{Hol06} to get intuitive and realistic representation of blood flow across a teemap-based plan of human body.
+In contrast to the scenarios in the aforementioned work, not every node in our vascular connection dataset has a corresponding node in the treemap. Thus, force-directed graph drawing method~\cite{} is added to the scene to find optimal positions of intermediate nodes on the paths that connect the root of the taxonomy (heart) with its leaves (body tissues shown as treemap tiles). The variation of the force-bundling method suitable for our application is known as sticky force-directed bundling~\cite{} which allows to fix the positions of certain nodes and allocate other nodes to achieve mechanical equilibrium between forces pulling the free nodes towards fixed positions.
+
+Other potentially useful methods did not provide the desired result. The first approach we tried consists of applying the
+force-directed edge bundling method~\cite{HW09} to bundle entire paths among the heart chambers and body tissues does not reflect the hierarchical structure of vascular connectivity graph. The second approach, force-based edge bundling over a graph produced by sticky force-directed node allocation algorithm results into unnatural distortion of short edges towards each other. Other edge-bundling methods~\cite{} operate on graphs with known node positions and thus would produce visualizations on our data that suffer from similar problems.
+
+
+

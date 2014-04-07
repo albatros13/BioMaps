@@ -1,0 +1,19 @@
+\section{Visualizing taxonomies and connectivity data}
+\label{sect:visualization}
+
+Treemaps~\cite{JS91} are an effective technique to visualize hierarchical data by using nested shapes in a space-filling layout.
+Each shape represents a geometric region, which can be subdivided recursively into smaller regions. The standard shape is the rectangle. 
+Nodes in a treemap, also called \emph{tiles}, represent individual data items in a dataset. Node size, color and text label can be used to represent attributes of the data item. One-layered treemaps can display data attributes but are not very good at emphasizing the place of an item in the overall hierarchical structure. To compensate for that, a small margin with structural labels is typically used. In treemaps displaying hierarchical structures, it is possible to navigate among different layers and zoom into selected tiles~\cite{BL07}.
+
+To create a treemap, one must define a tiling algorithm - a way to divide a tile into sub-tiles of specified areas.
+Tiling algorithms used for typical applications of treemaps such as e.g., visualization of folders in files in the computer file system with their respected sizes, do not associate tile positions with any characteristic of the data. This is not the case in our scenario: while a user navigates among different layers, filters data and zooms into selected areas, the tool should keep the tiles associated with the data in the same relative positions to each other. Otherwise, the user's perception of the displayed information will be quickly affected. Moreover, our tiling algorithm should allow the user to enforce constraints on tile positions to make the treemap views structurally resemble body regions. Hence, we developed a stable and customizable tiling algorithm that arranges tiles corresponding to data items according to a given template~\cite{KBK14}.
+
+For a set of $n$ data items with no positional constraints, a default template is created that consists of $\lfloor \sqrt{n} \rfloor$ rows and $\lceil sqrt(n) \rceil$ columns in each row but the last one (which may contain less columns). If the positional data is available (e.g., FMA ontology adjacent-to relation) or a user wants to rearrange the data manually, a custom template is associated with the parent node of the dataset items. The template is a hierarchical structure
+$\{splitType, \{\},..., \{\}\}$ where $splitType \in \{slice, dice\}$ defines a way to split the rectangle into sub-rectangles: vertically or horizontally. By recursively splitting the available area into sub-rectangles, one can define complex layouts that enforce two dimensional constraints in the form ``\emph{x} is left/right of \emph{y}'' or ``\emph{x} is above/below of \emph{y}'' where $x$ and $y$ are individual data items or groups of data items that in their turn can be allocated as needed using the same technique.
+
+%Example here: default template + rearranged items (left -//- vs right -//-).
+
+
+
+
+
