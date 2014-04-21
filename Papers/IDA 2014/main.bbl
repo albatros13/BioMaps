@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{KHL+07}
+Katifori, A., Halatsis, C., Lepouras, G., Vassilakis, C., Giannopoulou, E.:
+\newblock Ontology visualization methods\&mdash;a survey.
+\newblock ACM Comput. Surv. \textbf{39}(4) (2007)
+
 \bibitem{JS91}
 Johnson, B., Shneiderman, B.:
 \newblock Tree-maps: a space-filling approach to the visualization of
@@ -12,6 +17,11 @@ Blanch, R., Lecolinet, E.:
 \newblock Browsing zoomable treemaps: Structure-aware multi-scale navigation
   techniques.
 \newblock TVCG \textbf{13} (2007)  1248--1253
+
+\bibitem{KBK14}
+N.~Kokash, de Bono~B., K.J.:
+\newblock Template-based treemaps to preserve spatial constraints.
+\newblock In: Proc. IVAPP 2014. (2014)
 
 \bibitem{BGS12}
 de~Bono, B., Grenon, P., Sammut, S.:
