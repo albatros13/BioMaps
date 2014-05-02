@@ -1,8 +1,14 @@
 \begin{thebibliography}{1}
 
+\bibitem{BHW+11}
+de~Bono, B., Hoehndorf, R., Wimalaratne, S., Gkoutos, G., Grenon, P.:
+\newblock The {RICORDO} approach to semantic interoperability for biomedical
+  data and models: strategy, standards and solutions.
+\newblock BMC Research Notes \textbf{4} (2011)
+
 \bibitem{KHL+07}
 Katifori, A., Halatsis, C., Lepouras, G., Vassilakis, C., Giannopoulou, E.:
-\newblock Ontology visualization methods\&mdash;a survey.
+\newblock Ontology visualization methods - a survey.
 \newblock ACM Comput. Surv. \textbf{39}(4) (2007)
 
 \bibitem{JS91}
@@ -25,7 +31,7 @@ N.~Kokash, de Bono~B., K.J.:
 
 \bibitem{BGS12}
 de~Bono, B., Grenon, P., Sammut, S.:
-\newblock Apinatomy: A novel toolkit for visualizing multiscale anatomy
+\newblock {ApiNATOMY}: A novel toolkit for visualizing multiscale anatomy
   schematics with phenotype-related information.
 \newblock Hum Mutat \textbf{33}(5) (2012)  837--848
 
