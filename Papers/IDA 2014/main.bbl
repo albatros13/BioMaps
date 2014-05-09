@@ -1,15 +1,83 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{BHW+11}
 de~Bono, B., Hoehndorf, R., Wimalaratne, S., Gkoutos, G., Grenon, P.:
 \newblock The {RICORDO} approach to semantic interoperability for biomedical
   data and models: strategy, standards and solutions.
-\newblock BMC Research Notes \textbf{4} (2011)
+\newblock BMC Research Notes \textbf{4} (2011)  313
 
 \bibitem{KHL+07}
 Katifori, A., Halatsis, C., Lepouras, G., Vassilakis, C., Giannopoulou, E.:
 \newblock Ontology visualization methods - a survey.
 \newblock ACM Comput. Surv. \textbf{39}(4) (2007)
+
+\bibitem{Bla+13}
+Blake, J.A., et~al.:
+\newblock Gene ontology annotations and resources.
+\newblock Nucleic Acids Res. \textbf{41} (2013)  D530--535
+
+\bibitem{HMD+13}
+Hastings, J., de~Matos, P., Dekker, A., Ennis, M., Harsha, B., Kale, N.,
+  Muthukrishnan, V., Owen, G., Turner, S., Williams, M., Steinbeck, C.:
+\newblock The chebi reference database and ontology for biologically relevant
+  chemistry: enhancements for 2013.
+\newblock Nucleic Acids Res. \textbf{41}(D1) (2013)  D456--463
+
+\bibitem{BRA05}
+Bard, J., Rhee, S.Y., Ashburner, M.:
+\newblock An ontology for cell types.
+\newblock Genome Biol. \textbf{6}(2) (2005)  R21
+
+\bibitem{RM03}
+:
+\newblock A reference ontology for biomedical informatics: the foundational
+  model of anatomy.
+\newblock J. Biomed. Inform. \textbf{36}(6) (2003)  478--500
+
+\bibitem{EBI}
+EBI:
+\newblock Arrayexpress home | ebi.
+\newblock Web site (2012)
+
+\bibitem{HMC+13}
+L.~Harnisch, I.~Matthews, J.C., Karlsson, M.O.:
+\newblock Drug and disease model resources: a consortium to create standards
+  and tools to enhance model-based drug development.
+\newblock CPT Pharmacomet. Syst. Pharmacol. \textbf{2} (2013)  e34
+
+\bibitem{BGS12}
+de~Bono, B., Grenon, P., Sammut, S.:
+\newblock {ApiNATOMY}: A novel toolkit for visualizing multiscale anatomy
+  schematics with phenotype-related information.
+\newblock Hum Mutat \textbf{33}(5) (2012)  837--848
+
+\bibitem{KBK14}
+N.~Kokash, de Bono~B., K.J.:
+\newblock Template-based treemaps to preserve spatial constraints.
+\newblock In: Proc. IVAPP 2014. (2014)
+
+\bibitem{deB11}
+de~Bono, B.:
+\newblock Achieving semantic interoperability between physiology models and
+  clinical data.
+\newblock In: Proc. of IEEE Int. Conf. on e-Science Workshops. (2011)  135--142
+
+\bibitem{Gar+08}
+Gardner, D., et~al.:
+\newblock The neuroscience information framework: A data and knowledge
+  environment for neuroscience.
+\newblock Neuroinformatics \textbf{6}(3) (2008)  149--160
+
+\bibitem{MFT+09}
+Mitsuhashi, N., Fujieda, K., Tamura, T., Kawamoto, S., Takagi, T., Okubo, K.:
+\newblock Bodyparts3d: 3d structure database for anatomical concepts.
+\newblock Nucleic Acids Res. (\textbf{37})  D782--D785
+
+\bibitem{Asc06}
+Ascoli, G.A.:
+\newblock Mobilizing the base of neuroscience data: the case of neuronal
+  morphologies.
+\newblock Nat. Rev. Neurosci. \textbf{7}(4) (2006)  318--324
 
 \bibitem{JS91}
 Johnson, B., Shneiderman, B.:
@@ -24,22 +92,6 @@ Blanch, R., Lecolinet, E.:
   techniques.
 \newblock TVCG \textbf{13} (2007)  1248--1253
 
-\bibitem{KBK14}
-N.~Kokash, de Bono~B., K.J.:
-\newblock Template-based treemaps to preserve spatial constraints.
-\newblock In: Proc. IVAPP 2014. (2014)
-
-\bibitem{BGS12}
-de~Bono, B., Grenon, P., Sammut, S.:
-\newblock {ApiNATOMY}: A novel toolkit for visualizing multiscale anatomy
-  schematics with phenotype-related information.
-\newblock Hum Mutat \textbf{33}(5) (2012)  837--848
-
-\bibitem{BD06}
-M.Burch, S.:
-\newblock Trees in a treemap: Visualizing multiple hierarchies.
-\newblock In: Proc. VDA 2006. (2006)
-
 \bibitem{Hol06}
 Holten, D.:
 \newblock Hierarchical edge bundles: Visualization of adjacency relations in
@@ -47,9 +99,60 @@ Holten, D.:
 \newblock IEEE Transactions on Visualization and Computer Graphics
   \textbf{12}(5) (2006)  741--748
 
+\bibitem{GHN+11}
+Gansner, E.R., Hu, Y., North, S.C., Scheidegger, C.E.:
+\newblock Multilevel agglomerative edge bundling for visualizing large graphs.
+\newblock In Battista, G.D., Fekete, J.D., Qu, H., eds.: Proce of PacificVis,
+  IEEE Computer Society (2011)  187--194
+
+\bibitem{HET12}
+Hurter, C., Ersoy, O., Telea, A.:
+\newblock Graph bundling by kernel density estimation.
+\newblock Comp. Graph. Forum \textbf{31} (2012)  865--874
+
+\bibitem{FR91}
+Fruchterman, T.M.J., Reingold, E.M.:
+\newblock Graph drawing by force-directed placement.
+\newblock Software Practice and Experience \textbf{21}(11) (1991)  1129--1164
+
+\bibitem{Bos14}
+Bostock, M.:
+\newblock Sticky force layout.
+\newblock Online visualization tool (Accessed 09-14-2014)
+
+\bibitem{MRC09}
+Magnenat-Thalmann, N., Ratib, O., Choi, H.F., eds.:
+\newblock 3D Multiscale Physiological Human, Springer (2014)
+
+\bibitem{Mag09}
+Magnenat-Thalmann, N., ed.:
+\newblock Modelling the Physiological Human: Proceedings of the Second 3D
+  Physiological Human Workshop.
+\newblock Volume 5903 of LNCS., Springer (2009)
+
+\bibitem{BDB08}
+Burger, A., Davidson, D., Baldock, R., eds.:
+\newblock Anatomy Ontologies for Bioinformatics.
+\newblock Volume~6 of Computational Biology., Springer (2008)
+
+\bibitem{BD06}
+Burch, M., Diehl, S.:
+\newblock Trees in a treemap: Visualizing multiple hierarchies.
+\newblock In: Proc. VDA 2006. (2006)
+
+\bibitem{BET+99}
+Battista, G.D., Eades, P., Tamassia, R., Tollis, I.G.:
+\newblock Graph Drawing: Algorithms for the Visualization of Graphs.
+\newblock Prentice Hall (1999)
+
 \bibitem{HW09}
 Holten, D., van Wijk, J.J.:
 \newblock Force-directed edge bundling for graph visualization.
 \newblock Comput. Graph. Forum \textbf{28}(3) (2009)  983--990
+
+\bibitem{SHH11}
+Selassie, D., Heller, B., Heer, J.:
+\newblock Divided edge bundling for directional network data.
+\newblock IEEE Trans. Visualization \& Comp. Graphics (Proc. InfoVis) (2011)
 
 \end{thebibliography}

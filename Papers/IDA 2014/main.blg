@@ -1,5 +1,13 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
 The style file: splncs.bst
 Database file #1: main.bib
-Warning--I didn't find a database entry for ""
-(There was 1 warning)
+Warning--empty author in RM03
+Name 1 in "L. Harnisch, I. Matthews, J. Chard, and M. O. Karlsson" has a comma at the end for entry HMC+13
+while executing---line 1078 of file splncs.bst
+Warning--there's no year in MFT+09
+You can't pop an empty literal stack for entry MFT+09
+while executing---line 1078 of file splncs.bst
+Warning--empty booktitle in MRC09
+Warning--empty booktitle in Mag09
+Warning--empty booktitle in BDB08
+(There were 2 error messages)
