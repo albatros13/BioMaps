@@ -1,5 +1,6 @@
-\section{Visualizing taxonomies and connectivity data}
-\label{sect:visualization}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Visualizing Taxonomies and Connectivity Data} \label{sect:visualization}        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Treemaps~\cite{JS91} are an effective technique to visualize hierarchical data by using nested shapes in a space-filling layout.
 Each shape represents a geometric region, which can be subdivided recursively into smaller regions. The standard shape is the rectangle.
@@ -111,7 +112,10 @@ Once the coordinates for all connectivity graph nodes are determined, we apply h
 
 After one-time pre-processing to import data from available external sources, we store connectivity data in a convenient format. A user can interact with and edit these data using functionality of our application. One of the prime goals of our tools is to simplify the access and maintenance of biomedical taxonomies, vascular system among others. A user should be able to choose a way to represent connectivity data. There is ongoing work on the implementation of the orthogonal connector visualization algorithm that would place links into margins between tiles so that they will not obstruct the interaction with the tiles.
 
-\section{Visualization of models and metadata}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Visualization of Models and Metadata} \label{sect:visualization2}               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Various data is associated with entities in the ApiNATOMY taxonomy. 
 Among them are static and dynamic 3D models of body organs or its subsystems. 
@@ -135,25 +139,13 @@ Figure~\ref{fig:neuron-big} shows a sample neuron model associated with the ``Ne
 There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown above, such models will react to the variables and simulation parameter set by the user. Figure~\ref{fig:simulation} shows a sample data control panel to compare left and right heart performance, as well as mock-ups for parametric generation of conducting airways such as lungs~\cite{TPH00} and bronchial trees~\cite{THT+04}.
 \begin{figure*}
 \centering
-  \raisebox{2.4cm}{  
-  \begin{tabular}{c}
-  \subfigure[Simulation control panel]{
-    \includegraphics[width=5cm]{images/simulation.png}
-    \label{fig:panel}
-  }
-  \\
-  \subfigure[Parametric visualization]{
-    \includegraphics[width=5cm]{images/tree-generation-3d.png}
-    \label{fig:tree-generation-3d}
-  }
-  \end{tabular}
-  }
-  \subfigure[Conducting airways generation: mock-up]{
-    \includegraphics[width=6cm]{images/tree-generation.png}
-    \label{fig:tree-generation}
-  }
-  \caption{Dynamic 3D objects}
-  \label{fig:simulation}
+	\centering
+	\subfigure[Simulation control panel]{
+		\includegraphics[width=5cm]{images/simulation.png}
+		\label{fig:panel}
+	}
+	\caption{Dynamic 3D objects}
+	\label{fig:simulation}
 \end{figure*}
 
 The tool also supports the visualization of 2D and 3D protein structures and molecular networks which are represented as graphs on top of treemap tiles.
