@@ -118,8 +118,12 @@ Among them are static and dynamic 3D models of body organs or its subsystems.
 More specifically, we extract and display neuronal reconstructions and associated metadata from NeuroMorpho.Org \url{http://neuromorpho.org}.
 Figure~\ref{fig:neuron-big} shows a sample neuron model associated with the ``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''. ApiNATOMY allows users to create custom body plans and show selected 3D objects in its context. For example, Figure~\ref{fig:neuron-small} shows a screenshot of a circuit board with the ``Neocortex'' neuron and a 3D model of ``Liver''.
 
+There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown above, such models will react to the variables and simulation parameter set by the user. Figure~\ref{fig:simulation} shows a sample data control panel to compare left and right heart performance, as well as mock-ups for parametric generation of conducting airways such as lungs~\cite{TPH00} and bronchial trees~\cite{THT+04}.
+
+The tool also supports the visualization of 2D and 3D protein-protein interaction networks (see Figure~\ref{fig:protein}) which are represented as graphs on top of treemap tiles. We are in the process of the acquisition and integration of relevant data from the Ensembl genomic database \url{http://www.ensembl.org/}. In Ensembl, gene models are annotated automatically using biological sequences data (protein, mRNA) as support. Each gene model includes information such as the genomic coordinates of the gene and its coding and noncoding exon(s). One or more transcripts (nucleotide sequences resulting from the transcription of the genomic DNA to mRNA) may be annotated. One gene can have different transcripts or splice variants resulting from the alternative splicing of different exons in genes. We query the database to extract genes, transcripts, and translations with related protein features such as e.g., PFAN, and associate them with FMA entities. After that, protein domain features are schematically shown with the help of different shapes and colors in 3D environment Figure~\ref{fig:protein-3d}.
+
 \begin{figure*}
-\centering
+\centering 
   \subfigure[Neuron associated with ``Neocortex'' tile]{
     \includegraphics[width=6.8cm]{images/neuron-big.png}
     \label{fig:neuron-big}
@@ -132,7 +136,6 @@ Figure~\ref{fig:neuron-big} shows a sample neuron model associated with the ``Ne
   \label{fig:neurons}
 \end{figure*}
 
-There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown above, such models will react to the variables and simulation parameter set by the user. Figure~\ref{fig:simulation} shows a sample data control panel to compare left and right heart performance, as well as mock-ups for parametric generation of conducting airways such as lungs~\cite{TPH00} and bronchial trees~\cite{THT+04}.
 \begin{figure*}
 \centering
   \raisebox{2.4cm}{  
@@ -152,9 +155,15 @@ There is ongoing work on the programmatic generation of parameterized 3D models 
     \includegraphics[width=6cm]{images/tree-generation.png}
     \label{fig:tree-generation}
   }
+  \subfigure[Protein structure in 2D]{
+    \includegraphics[width=4.1cm]{images/protein.png}
+    \label{fig:protein}
+  }
+  \subfigure[Protein features in 3D]{
+    \includegraphics[width=7.5cm]{images/protein-3d.png}
+    \label{fig:protein-3d}
+  }
   \caption{Dynamic 3D objects}
   \label{fig:simulation}
 \end{figure*}
 
-The tool also supports the visualization of 2D and 3D protein structures and molecular networks which are represented as graphs on top of treemap tiles.
-We are in the process of the acquisition and integration of relevant data from databases such as e.g., Ensembl genome database \url{http://www.ensembl.org/}.
