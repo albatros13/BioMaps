@@ -12,12 +12,12 @@ To create a treemap, one must define a tiling algorithm - a way to divide a tile
 Tiling algorithms used for typical applications of treemaps such as e.g., visualization of folders in files in the computer file system with their respected sizes, do not associate tile positions with any characteristic of the data. This is not the case in our scenario: while a user navigates among different layers, filters data and zooms into selected areas, the tiles should be kept in the same relative positions to each other. Otherwise, the user's perception of the displayed information will be quickly disrupted. Moreover, our tiling algorithm should allow the user to enforce constraints on tile positions to make the treemap views structurally resemble body regions. Hence, we developed a stable and customizable tiling algorithm that arranges tiles according to a given template~\cite{KBK14}.
 
 For a set of $n$ data items with no positional constraints, a default template is created that consists of $\lfloor \sqrt{n}\, \rfloor$ rows and $\lceil \sqrt{n}\, \rceil$ columns in each row but the last one (which may contain fewer columns). If the positional data is available (e.g., FMA ontology adjacent-to relation) or a user wants to rearrange the data manually, a custom template is associated with the parent node of the dataset items. The template is a hierarchical structure
-$\{splitType, \{\},..., \{\}\}$ where \MH{$splitType \in \{slice, dice\}$}{Should we mention\\any others? Like `table' and `squarify'?} defines a way to split the rectangle into sub-rectangles: vertically or horizontally. By recursively splitting the available area into sub-rectangles, one can define complex layouts that enforce two dimensional constraints in the form ``\emph{x} is left/right of \emph{y}'' or ``\emph{x} is above/below of \emph{y}'' where $x$ and $y$ are individual data items or groups of data items that in their turn can be allocated as needed using the same technique.
+$\bigl\{\mathit{splitType}, \{\},\ldots, \{\}\bigr\}$ where $\mathit{splitType} \in \left\{\mathrm{slice}, \mathrm{dice}\right\}$ defines a way to split the rectangle into sub-rectangles: vertically or horizontally. By recursively splitting the available area into sub-rectangles, one can define complex layouts that enforce two dimensional constraints in the form ``$x$ is left/right of $y$'' or ``$x$ is above/below of $y$'' where $x$ and $y$ are individual data items or groups of data items that in their turn can be allocated as needed using the same technique.
 
 The schematic body plans created using template-based treemaps can be seen in \cref{fig:treemaps}. \Cref{fig:24tiles} shows the top level 24 tile body plan in 2D while \cref{fig:24tiles-heart-3d} shows the same view in 3D with the content of one of the tiles, ``Vascular Cardiac'', displayed. Observe that the treemap layout is controlled by the (default) templates and remains stable during the navigation.
 
 \begin{figure*}%
-  \MH{}{Should I remove the `BioMaps' title on the top-left?}%
+  % TODO: remove the `BioMaps' title on the top-left. Also for other images.
   \centering%
   \subfigure[Top level view in 2D]{
     \includegraphics[width=5.8cm]{images/24tiles.png}
@@ -43,8 +43,8 @@ Such techniques generally rely on edge rerouting strategies that are either sole
 
 As an example, consider the schematic visualization of blood vessels in human body.
 The initial dataset is a graph extracted from the FMA database which consists of approximately 11,300 edges and over 10,000 distinct nodes.
-An edge represents an unbranched segment of a blood vessel. Nodes represent \MH{junctions}{... and heart and micro-circulations?} between blood vessel segments.
-Samples of records from the dataset are shown in \cref{tab:vascular-connectivity}. The first column in the dataset is a unique vascular segment identifier (ID). The second column bears the vessel type, i.e. any one of four numbers that give \MH{}{Perhaps much of the information in the next two paragraphs could be cut?} an indication of the biological type of segment:
+An edge represents an unbranched segment of a blood vessel. Nodes represent blood vessel junctions and end-points.
+Samples of records from the dataset are shown in \cref{tab:vascular-connectivity}. The first column in the dataset is a unique vascular segment identifier (ID). The second column bears the vessel type, i.e. any one of four numbers that give \MH{}{Probably much of the information in the next two paragraphs could be cut.} an indication of the biological type of segment:
 1 - for arterial segment, 2 - microcirculation (MC), there are three types of MC edges: arteriole, capillary and venule, 3 - venous, and 4 - cardiac chamber.
 The third column bears FMA IDs. For non-MC edges (i.e. vessels of type 1, 3 or 4) the number in this column is the FMA ID of the blood vessel of
 which that segment is part (e.g. there are over 50 segments/edges that form part of the trunk of the aorta, i.e., FMA ID 50010931). For MC edges (type 2), the FMA ID is that of the body region in which the MC is embedded. The fourth and fifth columns in the dataset bear the unique node identifiers in an edge pair.
@@ -101,9 +101,9 @@ The first and the last IDs in this path correspond to the tiles in the treemap, 
 % lines) as possible, we set gravity and charge to 0 and the desired link
 % length to a minimal possible length.
 %%%%
-The extracted connectivity graphs for two heart walls: left ventricle (7101) and right atrium (7096), are shown in \cref{fig:force-7101,fig:force-7096}.
+The extracted connectivity graphs for the left ventricle (7101) is shown in \cref{fig:force-7101}.
 
-If there are too many edges to get a clear overview of the data, we can apply hierarchical edge bundling method that uses the path structure to bundle common sub-paths in the graph obtained during the first stage. The final set of paths from left ventricle and right atrium are shown in \cref{fig:bundled-7101,fig:bundled-7096}, respectively. In these images, both left ventricle and right atrium are descendants of tile ``Vascular Cardiac''.
+If there are too many edges to get a clear overview of the data, we can apply hierarchical edge bundling method that uses the path structure to bundle common sub-paths in the graph obtained during the first stage. The final set of paths from left ventricle and right atrium are shown in \cref{fig:bundled-7101,fig:bundled-7096}, respectively. In these images, both left ventricle and right atrium are descendants of the ``Vascular Cardiac'' tile.
 %%%% (MH: seems like an implementation detail)
 % By setting bundling algorithm tension parameter close to 1 (0.96-0.99),
 % we obtain a view that clearly shows that individual paths extracted from
@@ -111,17 +111,18 @@ If there are too many edges to get a clear overview of the data, we can apply hi
 % veins in the human body.
 %%%%
 \begin{figure*}%
-  \MH{}{In the interest of saving space, we could probably cut two of these. I would add a non-edge-bundled screenshot from the actual prototype, and we would keep one of the bundled ones.}%
   \centering%
   \subfigure[Arterial connections from left ventricle]{
     \includegraphics[width=5.8cm]{images/force-7101.png}
     \label{fig:force-7101}
   }%
-  \subfigure[Venous connections to right atrium]{
-    \includegraphics[width=5.8cm]{images/force-7096b.png}
-    \label{fig:force-7096}
+  \subfigure[Blood vessel connections within the heart]{
+    %\includegraphics[width=5.8cm]{images/force-7096b.png}
+    %\label{fig:force-7096}
+    \hskip5.8cm
+    % TODO: Insert screenshot of blood-vessel connections (inside the heart) from the actual prototype
   }%
-  \MH{}{Also, Natallia, could you blend the tile-background with 30\% transparency (or whiteness)? You can also just take a screenshot of the prototype after checking `Connections'.}
+  \MH{}{Natallia, could you blend the tile-background with 30\% transparency (or whiteness)? You can also just take a screenshot of the prototype after checking `Connections'.}
   \subfigure[Bundled paths from left ventricle]{
     \includegraphics[width=5.8cm]{images/connections-7101.png}
     \label{fig:bundled-7101}
@@ -150,7 +151,7 @@ More specifically, we extract and display neuronal reconstructions and associate
 
 There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown above, such models will react to variables and simulation parameters set by the user. \Cref{fig:simulation} shows a sample data control panel to compare left and right heart performance, as well as mock-ups for parametric generation of conducting airways such as lungs~\cite{TPH00} and bronchial trees~\cite{THT+04}.
 
-The tool also supports the visualization of 2D and 3D protein-protein interaction networks (see \cref{fig:protein}) which are represented as graphs on top of treemap tiles. We are in the process of the acquisition and integration of relevant data from the Ensembl genomic database \MH{\url{http://www.ensembl.org/}}{Cite?}. In Ensembl, gene models are annotated automatically using biological sequences data (protein, mRNA) as support. Each gene model includes information such as the genomic coordinates of the gene and its coding and noncoding exon(s). One or more transcripts (nucleotide sequences resulting from the transcription of the genomic DNA to mRNA) may be annotated. One gene can have different transcripts or splice variants resulting from the alternative splicing of different exons in genes. We query the database to extract genes, transcripts, and translations with related protein features such as e.g., PFAN, and associate them with FMA entities. After that, protein domain features are schematically shown with the help of different shapes and colors in 3D environment (\cref{fig:protein-3d}).
+The tool also supports the visualization of 2D and 3D protein-protein interaction networks (see \cref{fig:protein}) which are represented as graphs on top of treemap tiles. We are in the process of the acquisition and integration of relevant data from the Ensembl genomic database \MH{\url{http://www.ensembl.org/}}{cite?}. In Ensembl, gene models are annotated automatically using biological sequences data (protein, mRNA) as support. Each gene model includes information such as the genomic coordinates of the gene and its coding and noncoding exon(s). One or more transcripts (nucleotide sequences resulting from the transcription of the genomic DNA to mRNA) may be annotated. One gene can have different transcripts or splice variants resulting from the alternative splicing of different exons in genes. We query the database to extract genes, transcripts, and translations with related protein features such as e.g., PFAN, and associate them with FMA entities. After that, protein domain features are schematically shown with the help of different shapes and colors in 3D environment (\cref{fig:protein-3d}).
 
 \begin{figure*}
 \centering
@@ -186,10 +187,12 @@ The tool also supports the visualization of 2D and 3D protein-protein interactio
   \MH{}{TODO}
   \subfigure[Protein structure in 2D]{
     %\includegraphics[width=4.1cm]{images/protein.png}
+    \hskip4.1cm
     \label{fig:protein}
   }
   \subfigure[Protein features in 3D]{
     %\includegraphics[width=7.5cm]{images/protein-3d.png}
+    \hskip7.5cm
     \label{fig:protein-3d}
   }
   \caption{Dynamic 3D objects}
