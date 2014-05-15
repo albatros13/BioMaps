@@ -23,7 +23,7 @@ The schematic body plans created using template-based treemaps can be seen in Fi
     \includegraphics[width=5.8cm]{images/24tiles-heart-3d.png}
     \label{fig:24tiles-heart-3d}
   }
-  \caption{ApiNATOMY circuitboards}
+  \caption{ApiNATOMY body plans}
   \label{fig:treemaps}
 \end{figure*}
 
@@ -78,10 +78,10 @@ MC segment 121a is supplied with blood by the arterial segment 8499 while MC seg
 
 The accurate visualization of the cardiovascular system in a comprehensible way requires complex pre-processing (about 12 rules were identified to extract the data of interest from the presented dataset by a biomedical expert in our team).
 In this paper, for the illustration purpose we show only paths connecting MCs of the walls of the heart to MCs belonging to the sub-organs of the organs in our 24 upper level tile body plan.
-To obtain this view, we looked for the shortest paths (due to the way the data is represented in the initial data set, loops are possible) from the MCs of the heart walls to the final FMA tiles. For example, the path from the left ventricle to the wall of left inferior lobar bronchus MC looks like 
-{$7101 \rightarrow 2406 \rightarrow ... \rightarrow 8499 \rightarrow 62528,$}
-while the path from this organ to the right atrium is like follows: 
-{$7096 \leftarrow 771 \leftarrow ... \leftarrow 9546 \leftarrow 9547 \leftarrow 62528.$}
+To obtain this view, we looked for the shortest paths (due to the way the data is represented in the initial data set, loops are possible) from the MCs of the heart walls to the final FMA tiles. For example, the path from the left ventricle to the wall of left inferior lobar bronchus MC is as follows:
+{\scriptsize $7101 \rightarrow 2406 \rightarrow 2407 \rightarrow 2573 \rightarrow 2657 \rightarrow 3780 \rightarrow 4288 \rightarrow 4707 \rightarrow 4709 \rightarrow 4711 \rightarrow 4713 \rightarrow 4714 \rightarrow 8492 \rightarrow 8494 \rightarrow 8496 \rightarrow 8498 \rightarrow 8499 \rightarrow 62528,$}
+while the path from this organ to the right atrium is
+{\scriptsize $7096 \leftarrow 771 \leftarrow 1333 \leftarrow 1334 \leftarrow 1731 \leftarrow 1993 \leftarrow 1994 \leftarrow 1996 \leftarrow 1998 \leftarrow 1999 \leftarrow 1983 \leftarrow 9534 \leftarrow 9536 \leftarrow 9538 \leftarrow 9540 \leftarrow 9542 \leftarrow 9544 \leftarrow 9546 \leftarrow 9547 \leftarrow 62528.$}
 
 The first and the last IDs in this path correspond to the tiles in the treemap view, while the intermediate IDs will be represented using auxiliary nodes with undefined coordinates. One of the issues we encountered is the need to determine optimal positions for these nodes. Since several paths as above can have common sub-paths, the intermediate nodes should not deviate too much from the way from the heart MC to each of the end tiles sharing such sub-paths. This motivates our application of the sticky force-directed graph visualization method~\cite{FR91}\cite{Bos14} that given a sub-set of nodes with fixed coordinates arrange other nodes to optimize forces on the graph edges. As our only objective is to allocate intermediate nodes as close to the paths they belong to (which most naturally can be represented by straight lines) as possible, we set gravity and charge to 0 and the desired link length to a minimal possible length. The extracted connectivity graphs for two heart walls: left ventricle (7101) and right atrium (7096), are shown in Figures~\ref{fig:force-7101} and \ref{fig:force-7096}.
 
@@ -111,50 +111,31 @@ Once the coordinates for all connectivity graph nodes are determined, we apply h
 
 After one-time pre-processing to import data from available external sources, we store connectivity data in a convenient format. A user can interact with and edit these data using functionality of our application. One of the prime goals of our tools is to simplify the access and maintenance of biomedical taxonomies, vascular system among others. A user should be able to choose a way to represent connectivity data. There is ongoing work on the implementation of the orthogonal connector visualization algorithm that would place links into margins between tiles so that they will not obstruct the interaction with the tiles.
 
-\section{Visualization of models and metadata}
+\section{Static and dynamic 3D models}
 
 Various data is associated with entities in the ApiNATOMY taxonomy. 
 Among them are static and dynamic 3D models of body organs or its subsystems. 
-More specifically, we extract and display neuronal reconstructions and associated metadata from NeuroMorpho.Org \url{http://neuromorpho.org}.
-Figure~\ref{fig:neuron-big} shows a sample neuron model associated with the ``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''. ApiNATOMY allows users to create custom body plans and show selected 3D objects in its context. For example, Figure~\ref{fig:neuron-small} shows a screenshot of a circuit board with the ``Neocortex'' neuron and a 3D model of ``Liver''.
+More specifically, we extract and display neuronal reconstructions and associated metadata from NeuroMorpho.Org.
+Figure~\ref{fig:neuron-big} shows a sample neuron model associated with the ``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''. ApiNATOMY allows users to create custom body plans and show selected 3D objects in its context. For example, Figure~\ref{fig:neuron-small} features a view with two types of 3D objects: the ``Neocortex'' neuron and a static 3D model of ``Liver''.
 
 \begin{figure*}
 \centering
   \subfigure[Neuron associated with ``Neocortex'' tile]{
-    \includegraphics[width=6.8cm]{images/neuron-big.png}
+    \includegraphics[width=5.8cm]{images/neuron-big.png}
     \label{fig:neuron-big}
   }
   \subfigure[Contextual view for ``Nervous Cephalic'']{
-    \includegraphics[width=4.8cm]{images/neuron-small.png}
+    \includegraphics[width=5.8cm]{images/neuron-small.png}
     \label{fig:neuron-small}
   }
-  \caption{Static 3D objects}
+  \caption{Digitally reconstructed neurons \url{http://neuromorpho.org}}
   \label{fig:neurons}
 \end{figure*}
 
-There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown above, such models will react to the variables and simulation parameter set by the user. Figure~\ref{fig:simulation} shows a sample data control panel to compare left and right heart performance, as well as mock-ups for parametric generation of conducting airways such as lungs~\cite{TPH00} and bronchial trees~\cite{THT+04}.
-\begin{figure*}
-\centering
-  \raisebox{2.4cm}{  
-  \begin{tabular}{c}
-  \subfigure[Simulation control panel]{
-    \includegraphics[width=5cm]{images/simulation.png}
-    \label{fig:panel}
-  }
-  \\
-  \subfigure[Parametric visualization]{
-    \includegraphics[width=5cm]{images/tree-generation-3d.png}
-    \label{fig:tree-generation-3d}
-  }
-  \end{tabular}
-  }
-  \subfigure[Conducting airways generation: mock-up]{
-    \includegraphics[width=6cm]{images/tree-generation.png}
-    \label{fig:tree-generation}
-  }
-  \caption{Dynamic 3D objects}
-  \label{fig:simulation}
-\end{figure*}
+There is ongoing work on the programmatic generation of dynamic 3D models
+of the conducting airways such as lungs~\cite{TPH00} or bronchial trees~\cite{THT+04}.
 
-The tool also supports the visualization of 2D and 3D protein structures and molecular networks which are represented as graphs on top of treemap tiles.
-We are in the process of the acquisition and integration of relevant data from databases such as e.g., Ensembl genome database \url{http://www.ensembl.org/}.
+\section{Protein features}
+
+We extract protein features form ensamble.org database 
+PFAM, tmhmm and signalP features for all translations of all human genes

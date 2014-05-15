@@ -120,6 +120,19 @@ Bostock, M.:
 \newblock Sticky force layout.
 \newblock Online visualization tool (Accessed 09-14-2014)
 
+\bibitem{TPH00}
+M.~H.~Tawhai, A.J.P., Hunter, P.J.:
+\newblock Generation of an anatomically based three-dimensional model of the
+  conducting airways.
+\newblock Annals of Biomedical Engineering, \textbf{28} (2000)  793–802
+
+\bibitem{THT+04}
+Tawhai, M.H., Hunter, P., Tschirren, J., Reinhardt, J., McLennan, G., Hoffman,
+  E.:
+\newblock Ct-based geometry analysis and ?nite element models of the human and
+  ovine bronchial tree.
+\newblock J. Appl Physiol \textbf{97} (2004)  2310–2321
+
 \bibitem{MRC09}
 Magnenat-Thalmann, N., Ratib, O., Choi, H.F., eds.:
 \newblock 3D Multiscale Physiological Human, Springer (2014)
