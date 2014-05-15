@@ -3,19 +3,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Treemaps~\cite{JS91} are an effective technique to visualize hierarchical data by using nested shapes in a space-filling layout.
-Each shape represents a geometric region, which can be subdivided recursively into smaller regions. The standard shape is the rectangle.
+Each shape represents a geometric region, which can be subdivided recursively into smaller regions. The standard shape is a rectangle.
 Nodes in a treemap, also called \emph{tiles}, represent individual data items in a dataset. Node size, color and text label can be used to represent attributes of the data item. One-layered treemaps can display data attributes but are not very good at emphasizing the place of an item in the overall hierarchical structure. To compensate for that, a small margin with structural labels is typically used. In treemaps displaying hierarchical structures, it is possible to navigate among different layers and zoom into selected tiles~\cite{BL07}.
 
+% TODO: rewrite the 'flat treemap' text for a bit of extra clarity (MH)
+
 To create a treemap, one must define a tiling algorithm - a way to divide a tile into sub-tiles of specified areas.
-Tiling algorithms used for typical applications of treemaps such as e.g., visualization of folders in files in the computer file system with their respected sizes, do not associate tile positions with any characteristic of the data. This is not the case in our scenario: while a user navigates among different layers, filters data and zooms into selected areas, the tool should keep the tiles associated with the data in the same relative positions to each other. Otherwise, the user's perception of the displayed information will be quickly affected. Moreover, our tiling algorithm should allow the user to enforce constraints on tile positions to make the treemap views structurally resemble body regions. Hence, we developed a stable and customizable tiling algorithm that arranges tiles corresponding to data items according to a given template~\cite{KBK14}.
+Tiling algorithms used for typical applications of treemaps such as e.g., visualization of folders in files in the computer file system with their respected sizes, do not associate tile positions with any characteristic of the data. This is not the case in our scenario: while a user navigates among different layers, filters data and zooms into selected areas, the tiles should be kept in the same relative positions to each other. Otherwise, the user's perception of the displayed information will be quickly disrupted. Moreover, our tiling algorithm should allow the user to enforce constraints on tile positions to make the treemap views structurally resemble body regions. Hence, we developed a stable and customizable tiling algorithm that arranges tiles according to a given template~\cite{KBK14}.
 
-For a set of $n$ data items with no positional constraints, a default template is created that consists of $\lfloor \sqrt{n} \rfloor$ rows and $\lceil \sqrt{n} \rceil$ columns in each row but the last one (which may contain less columns). If the positional data is available (e.g., FMA ontology adjacent-to relation) or a user wants to rearrange the data manually, a custom template is associated with the parent node of the dataset items. The template is a hierarchical structure
-$\{splitType, \{\},..., \{\}\}$ where $splitType \in \{slice, dice\}$ defines a way to split the rectangle into sub-rectangles: vertically or horizontally. By recursively splitting the available area into sub-rectangles, one can define complex layouts that enforce two dimensional constraints in the form ``\emph{x} is left/right of \emph{y}'' or ``\emph{x} is above/below of \emph{y}'' where $x$ and $y$ are individual data items or groups of data items that in their turn can be allocated as needed using the same technique.
+For a set of $n$ data items with no positional constraints, a default template is created that consists of $\lfloor \sqrt{n}\, \rfloor$ rows and $\lceil \sqrt{n}\, \rceil$ columns in each row but the last one (which may contain fewer columns). If the positional data is available (e.g., FMA ontology adjacent-to relation) or a user wants to rearrange the data manually, a custom template is associated with the parent node of the dataset items. The template is a hierarchical structure
+$\{splitType, \{\},..., \{\}\}$ where \MH{$splitType \in \{slice, dice\}$}{Should we mention\\any others? Like `table' and `squarify'?} defines a way to split the rectangle into sub-rectangles: vertically or horizontally. By recursively splitting the available area into sub-rectangles, one can define complex layouts that enforce two dimensional constraints in the form ``\emph{x} is left/right of \emph{y}'' or ``\emph{x} is above/below of \emph{y}'' where $x$ and $y$ are individual data items or groups of data items that in their turn can be allocated as needed using the same technique.
 
-The schematic body plans created using template-based treemaps can be seen in Figure~\ref{fig:treemaps}. Figure~\ref{fig:24tiles} shows the top level 24 tile body plan in 2D while Figure~\ref{fig:24tiles-heart-3d} shows the same view in 3D with the content of one of the tiles, ``Vascular Cardiac'', displayed. One can observe that the treemap layout is controlled by the (default) templates and remains stable during the navigation.
+The schematic body plans created using template-based treemaps can be seen in \cref{fig:treemaps}. \Cref{fig:24tiles} shows the top level 24 tile body plan in 2D while \cref{fig:24tiles-heart-3d} shows the same view in 3D with the content of one of the tiles, ``Vascular Cardiac'', displayed. Observe that the treemap layout is controlled by the (default) templates and remains stable during the navigation.
 
-\begin{figure*}
-\centering
+\begin{figure*}%
+  \MH{}{Should I remove the `BioMaps' title on the top-left?}%
+  \centering%
   \subfigure[Top level view in 2D]{
     \includegraphics[width=5.8cm]{images/24tiles.png}
     \label{fig:24tiles}
@@ -28,18 +31,20 @@ The schematic body plans created using template-based treemaps can be seen in Fi
   \label{fig:treemaps}
 \end{figure*}
 
-\subsection{Connectivity data}
 
-We use treemap-based body plans as background to overlay the schematic representation of biological systems such as
-circulatory, respiratory, or nervous systems. Body systems are essentially graphs or hypergraphs with nodes corresponding to body parts (treemap tiles), entities that belong to body parts (proteins, cells, etc.) or auxiliary nodes that are not displayed on the treemap but still carry important biomedical information, while their edges or paths represent organ system compounds such as blood vessels or nervous connections that pass through the certain body parts or its sub-parts.
+\subsection{Connectivity data} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Body systems are intrinsically complex and require efficient data visualization techniques that would help us to avoid clutters induced by the large amount of graph edges and their crossings and allow users to overview large parts of the body systems as well as to trace individual connections and analyze their structure. Edge bundling techniques~\cite{Hol06},\cite{GHN+11},\cite{HET12} have been proposed to improve perception of connectivity data in large dense graphs.
-Such techniques generally rely on edge rerouting strategies that are either solely target at improving visual perception of edges constrained by positions of nodes or exploit the relations among connectivity data as guidelines for more natural allocation of graph edges and nodes. Our application requires the mixture of these techniques
+With the treemap-based body plans as background, we overlay the schematic representation of \emph{body systems} such as circulatory, respiratory, or nervous systems. Body systems are essentially graphs with nodes corresponding to body parts (treemap tiles) or entities inside of body parts (proteins, cells, etc.), and their edges represent organ system compounds such as blood vessels or nervous connections that pass through such body parts or sub-parts.
+%%
+They cn also contain auxiliary nodes that are not represented on the treemap but still carry important biomedical information. 
 
-As example, we consider the schematic visualization of blood vessels in human body.
+Body systems are intrinsically complex and require efficient data visualization techniques to help avoid clutter induced by the large amount of graph edges and their crossings. They should allow users to overview large parts of the body systems as well as to trace individual connections and analyze their structure. Edge bundling techniques~\cite{Hol06,GHN+11,HET12} have been proposed to improve perception of connectivity data in large dense graphs.
+Such techniques generally rely on edge rerouting strategies that are either solely targeted at improving visual perception (by using the positions of nodes) or exploit the relationships among connectivity data as guidelines for a more natural allocation of graph edges and nodes. Our application requires a mixture of these techniques.
+
+As an example, consider the schematic visualization of blood vessels in human body.
 The initial dataset is a graph extracted from the FMA database which consists of approximately 11,300 edges and over 10,000 distinct nodes.
-An edge represents an unbranched segment of a blood vessel. Nodes represent junctions between blood vessel segments.
-Samples of records from the dataset are shown in Table~\ref{tab:vascular-connectivity}. The first column in the dataset is a unique vascular segment identifier (ID). The second column bears the vessel type, i.e. any one of four numbers that give an indication of the biological type of segment:
+An edge represents an unbranched segment of a blood vessel. Nodes represent \MH{junctions}{... and heart and micro-circulations?} between blood vessel segments.
+Samples of records from the dataset are shown in \cref{tab:vascular-connectivity}. The first column in the dataset is a unique vascular segment identifier (ID). The second column bears the vessel type, i.e. any one of four numbers that give \MH{}{Perhaps much of the information in the next two paragraphs could be cut?} an indication of the biological type of segment:
 1 - for arterial segment, 2 - microcirculation (MC), there are three types of MC edges: arteriole, capillary and venule, 3 - venous, and 4 - cardiac chamber.
 The third column bears FMA IDs. For non-MC edges (i.e. vessels of type 1, 3 or 4) the number in this column is the FMA ID of the blood vessel of
 which that segment is part (e.g. there are over 50 segments/edges that form part of the trunk of the aorta, i.e., FMA ID 50010931). For MC edges (type 2), the FMA ID is that of the body region in which the MC is embedded. The fourth and fifth columns in the dataset bear the unique node identifiers in an edge pair.
@@ -74,57 +79,78 @@ capillary edge are equivalent, and b) the end node of the capillary edge and the
 edge are equivalent.
 
 In the above example, the anatomical entity in which the MC is embedded is 62528 - the topology of MC segment connectivity is as follows:
-$$62528\_2 - [121a] \rightarrow 62528\_4 - [121c] \rightarrow 62528\_5 \leftarrow [121v] - 62528\_3.$$
+\[
+	62528\_2  \;\xrightarrow{\;\text{121a}\;}\;
+	62528\_4  \;\xrightarrow{\;\text{121c}\;}\;
+	62528\_5  \;\xleftarrow {\;\text{121v}\;}\;
+	62528\_3  \text.
+\]
 MC segment 121a is supplied with blood by the arterial segment 8499 while MC segment 121v is drained of blood by the venous segment 9547.
 
 The accurate visualization of the cardiovascular system in a comprehensible way requires complex pre-processing (about 12 rules were identified to extract the data of interest from the presented dataset by a biomedical expert in our team).
-In this paper, for the illustration purpose we show only paths connecting MCs of the walls of the heart to MCs belonging to the sub-organs of the organs in our 24 upper level tile body plan.
-To obtain this view, we looked for the shortest paths (due to the way the data is represented in the initial data set, loops are possible) from the MCs of the heart walls to the final FMA tiles. For example, the path from the left ventricle to the wall of left inferior lobar bronchus MC looks like 
-{$7101 \rightarrow 2406 \rightarrow ... \rightarrow 8499 \rightarrow 62528,$}
+In this paper, for illustration purpose we show only paths connecting MCs of the walls of the heart to MCs belonging to the sub-organs of the organs in our upper level 24 tile body plan.
+To obtain this view, we looked for the shortest paths (due to the way the data is represented in the initial data set, cycles are possible) from the MCs of the heart walls to the final FMA tiles. For example, the path from the left ventricle to the wall of left inferior lobar bronchus MC looks like 
+{$7101 \rightarrow 2406 \rightarrow \cdots \rightarrow 8499 \rightarrow 62528$,}
 while the path from this organ to the right atrium is like follows: 
-{$7096 \leftarrow 771 \leftarrow ... \leftarrow 9546 \leftarrow 9547 \leftarrow 62528.$}
+{$7096 \leftarrow 771 \leftarrow \cdots \leftarrow 9546 \leftarrow 9547 \leftarrow 62528$.}
 
-The first and the last IDs in this path correspond to the tiles in the treemap view, while the intermediate IDs will be represented using auxiliary nodes with undefined coordinates. One of the issues we encountered is the need to determine optimal positions for these nodes. Since several paths as above can have common sub-paths, the intermediate nodes should not deviate too much from the way from the heart MC to each of the end tiles sharing such sub-paths. This motivates our application of the sticky force-directed graph visualization method~\cite{FR91}\cite{Bos14} that given a sub-set of nodes with fixed coordinates arrange other nodes to optimize forces on the graph edges. As our only objective is to allocate intermediate nodes as close to the paths they belong to (which most naturally can be represented by straight lines) as possible, we set gravity and charge to 0 and the desired link length to a minimal possible length. The extracted connectivity graphs for two heart walls: left ventricle (7101) and right atrium (7096), are shown in Figures~\ref{fig:force-7101} and \ref{fig:force-7096}.
+The first and the last IDs in this path correspond to the tiles in the treemap, while the intermediate IDs will be represented using auxiliary nodes with undefined coordinates. One of the issues we encountered is the need to determine optimal positions for these nodes. Since several paths as above can have common sub-paths, the intermediate nodes should not deviate too much from the way from the heart MC to each of the end tiles sharing such sub-paths. This motivates our application of the sticky force-directed graph visualization method~\cite{FR91,Bos14} in which a sub-set of nodes have fixed coordinates, and the coordinates of the other nodes is determined by simulating imaginary forces applied by their edges.
+%%%% (MH: seems like an implementation detail)
+% As our only objective is to allocate intermediate nodes as close to the
+% paths they belong to (which most naturally can be represented by straight
+% lines) as possible, we set gravity and charge to 0 and the desired link
+% length to a minimal possible length.
+%%%%
+The extracted connectivity graphs for two heart walls: left ventricle (7101) and right atrium (7096), are shown in \cref{fig:force-7101,fig:force-7096}.
 
-Once the coordinates for all connectivity graph nodes are determined, we apply hierarchical edge bundling method that uses the path structure to bundle paths with common sub-paths in the graph obtained on the first stage. The final set of paths from left ventricle and right atrium are shown in Figures~\ref{fig:bundled-7101} and \ref{fig:bundled-7096}, respectively. In these images, both left ventricle and right atrium are descendants of tile ``Vascular Cardiac''. By setting bundling algorithm tension parameter close to 1 (0.96-0.99), we obtain a view that clearly shows that individual paths extracted from our dataset form ``highways'' which correspond to major arteries and veins in the human body.
-
-\begin{figure*}
-\centering
+If there are too many edges to get a clear overview of the data, we can apply hierarchical edge bundling method that uses the path structure to bundle common sub-paths in the graph obtained during the first stage. The final set of paths from left ventricle and right atrium are shown in \cref{fig:bundled-7101,fig:bundled-7096}, respectively. In these images, both left ventricle and right atrium are descendants of tile ``Vascular Cardiac''.
+%%%% (MH: seems like an implementation detail)
+% By setting bundling algorithm tension parameter close to 1 (0.96-0.99),
+% we obtain a view that clearly shows that individual paths extracted from
+% our dataset form ``highways'' which correspond to major arteries and
+% veins in the human body.
+%%%%
+\begin{figure*}%
+  \MH{}{In the interest of saving space, we could probably cut two of these. I would add a non-edge-bundled screenshot from the actual prototype, and we would keep one of the bundled ones.}%
+  \centering%
   \subfigure[Arterial connections from left ventricle]{
     \includegraphics[width=5.8cm]{images/force-7101.png}
     \label{fig:force-7101}
-  }
+  }%
   \subfigure[Venous connections to right atrium]{
     \includegraphics[width=5.8cm]{images/force-7096b.png}
     \label{fig:force-7096}
-  }
+  }%
+  \MH{}{Also, Natallia, could you blend the tile-background with 30\% transparency (or whiteness)? You can also just take a screenshot of the prototype after checking `Connections'.}
   \subfigure[Bundled paths from left ventricle]{
     \includegraphics[width=5.8cm]{images/connections-7101.png}
     \label{fig:bundled-7101}
-  }
+  }%
   \subfigure[Bundled paths to right atrium]{
     \includegraphics[width=5.8cm]{images/connections-7096b.png}
     \label{fig:bundled-7096}
-  }
+  }%
   \caption{Cardiovascular system}
   \label{fig:vascular-connectivity}
 \end{figure*}
 
-After one-time pre-processing to import data from available external sources, we store connectivity data in a convenient format. A user can interact with and edit these data using functionality of our application. One of the prime goals of our tools is to simplify the access and maintenance of biomedical taxonomies, vascular system among others. A user should be able to choose a way to represent connectivity data. There is ongoing work on the implementation of the orthogonal connector visualization algorithm that would place links into margins between tiles so that they will not obstruct the interaction with the tiles.
+After a one-time pre-processing to import data from available external sources, we store connectivity data in a convenient format. A user can interact with and edit this data using our application.
+
+One of the prime goals of the tool is to simplify the access and maintenance of biomedical taxonomies, including those concerned with (vascular) connectivity data. A user should be able to customize the way in which that data is represented. There is ongoing work on an implementation of the orthogonal connector visualization algorithm that would place edges into margins between tiles so that they will not obstruct the interaction with the tiles themselves.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Visualization of Models and Metadata} \label{sect:visualization2}               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Various data is associated with entities in the ApiNATOMY taxonomy. 
-Among them are static and dynamic 3D models of body organs or its subsystems. 
-More specifically, we extract and display neuronal reconstructions and associated metadata from NeuroMorpho.Org \url{http://neuromorpho.org}.
-Figure~\ref{fig:neuron-big} shows a sample neuron model associated with the ``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''. ApiNATOMY allows users to create custom body plans and show selected 3D objects in its context. For example, Figure~\ref{fig:neuron-small} shows a screenshot of a circuit board with the ``Neocortex'' neuron and a 3D model of ``Liver''.
+The entities in the ApiNATOMY taxonomy have various data associated with them. 
+This includes static and dynamic 3D models of body organs and their subsystems. 
+More specifically, we extract and display neuronal reconstructions and associated metadata from \url{http://neuromorpho.org}~\cite{Asc06}.
+\Cref{fig:neuron-big} shows a sample neuron model associated with the neocortex (reached through``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''). ApiNATOMY allows users to create custom body plans and show selected 3D objects in their proper context. For example, \cref{fig:neuron-small} shows a screenshot of a circuit board with the ``Neocortex'' neuron and a 3D model of ``Liver''.
 
-There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown above, such models will react to the variables and simulation parameter set by the user. Figure~\ref{fig:simulation} shows a sample data control panel to compare left and right heart performance, as well as mock-ups for parametric generation of conducting airways such as lungs~\cite{TPH00} and bronchial trees~\cite{THT+04}.
+There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown above, such models will react to variables and simulation parameters set by the user. \Cref{fig:simulation} shows a sample data control panel to compare left and right heart performance, as well as mock-ups for parametric generation of conducting airways such as lungs~\cite{TPH00} and bronchial trees~\cite{THT+04}.
 
-The tool also supports the visualization of 2D and 3D protein-protein interaction networks (see Figure~\ref{fig:protein}) which are represented as graphs on top of treemap tiles. We are in the process of the acquisition and integration of relevant data from the Ensembl genomic database \url{http://www.ensembl.org/}. In Ensembl, gene models are annotated automatically using biological sequences data (protein, mRNA) as support. Each gene model includes information such as the genomic coordinates of the gene and its coding and noncoding exon(s). One or more transcripts (nucleotide sequences resulting from the transcription of the genomic DNA to mRNA) may be annotated. One gene can have different transcripts or splice variants resulting from the alternative splicing of different exons in genes. We query the database to extract genes, transcripts, and translations with related protein features such as e.g., PFAN, and associate them with FMA entities. After that, protein domain features are schematically shown with the help of different shapes and colors in 3D environment Figure~\ref{fig:protein-3d}.
+The tool also supports the visualization of 2D and 3D protein-protein interaction networks (see \cref{fig:protein}) which are represented as graphs on top of treemap tiles. We are in the process of the acquisition and integration of relevant data from the Ensembl genomic database \MH{\url{http://www.ensembl.org/}}{Cite?}. In Ensembl, gene models are annotated automatically using biological sequences data (protein, mRNA) as support. Each gene model includes information such as the genomic coordinates of the gene and its coding and noncoding exon(s). One or more transcripts (nucleotide sequences resulting from the transcription of the genomic DNA to mRNA) may be annotated. One gene can have different transcripts or splice variants resulting from the alternative splicing of different exons in genes. We query the database to extract genes, transcripts, and translations with related protein features such as e.g., PFAN, and associate them with FMA entities. After that, protein domain features are schematically shown with the help of different shapes and colors in 3D environment (\cref{fig:protein-3d}).
 
 \begin{figure*}
 \centering
@@ -142,29 +168,28 @@ The tool also supports the visualization of 2D and 3D protein-protein interactio
 
 \begin{figure*}
 \centering
-  \raisebox{2.4cm}{  
-  \begin{tabular}{c}
   \subfigure[Simulation control panel]{
     \includegraphics[width=5cm]{images/simulation.png}
     \label{fig:panel}
   }
-  \\
-  \subfigure[Parametric visualization]{
-    \includegraphics[width=5cm]{images/tree-generation-3d.png}
-    \label{fig:tree-generation-3d}
-  }
-  \end{tabular}
-  }
-  \subfigure[Conducting airways generation: mock-up]{
-    \includegraphics[width=6cm]{images/tree-generation.png}
-    \label{fig:tree-generation}
-  }
+%%%% Removed, as requested by Bernard; they will be used in a later paper
+%  \subfigure[Parametric visualization]{
+%    \includegraphics[width=5cm]{images/tree-generation-3d.png}
+%    \label{fig:tree-generation-3d}
+%  }
+%  \end{tabular}
+%  }
+%  \subfigure[Conducting airways generation: mock-up]{
+%    \includegraphics[width=6cm]{images/tree-generation.png}
+%    \label{fig:tree-generation}
+%  }
+  \MH{}{TODO}
   \subfigure[Protein structure in 2D]{
-    \includegraphics[width=4.1cm]{images/protein.png}
+    %\includegraphics[width=4.1cm]{images/protein.png}
     \label{fig:protein}
   }
   \subfigure[Protein features in 3D]{
-    \includegraphics[width=7.5cm]{images/protein-3d.png}
+    %\includegraphics[width=7.5cm]{images/protein-3d.png}
     \label{fig:protein-3d}
   }
   \caption{Dynamic 3D objects}

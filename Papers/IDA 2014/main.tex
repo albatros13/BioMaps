@@ -11,7 +11,12 @@
 \usepackage[draft]{hyperref}
 \usepackage{listings}
 \usepackage{cancel}
-\usepackage{cleveref}
+\usepackage[capitalize]{cleveref}
+\usepackage{marginnote}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\MH}[2]{\marginnote{\tiny\color{red}(MH: #2)}\textcolor{red}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}                                                                         %
@@ -50,7 +55,8 @@
 \begin{abstract}
 Physiology experts deal with complex biophysical relationships, across multiple spatial and temporal scales.
 Automating the discovery of such relationships, in terms of physiological meaning, is a key goal to the physiology community.
-ApiNATOMY is an effort to provide intuitive graphical means to manage ontologies and semantic metadata relevant to physiology. In this paper, we present an integrated web-based ApiNATOMY environment for physiology experts to navigate through circuitboard visualizations of body components and their connections across scales. In particular, we present a tool prototype that visualizes schematics of ontology-based knowledge about body parts and their cardiovascular and neural connections. Graphical renderings of gene products and mathematical models of processes that are semantically annotated with this knowledge are overlaid on these schematics.
+ApiNATOMY is an effort to provide an intuitive graphical interface for managing ontologies and semantic metadata relevant to physiology.
+In this paper, we present an \MH{integrated}{What does 'integrated' mean here?} web-based ApiNATOMY environment for physiology experts to navigate through circuitboard visualizations of body components and their connections across scales. In particular, we present a tool prototype that visualizes schematics of ontology-based knowledge about body parts and their cardiovascular and neural connections. Graphical renderings of gene products and mathematical models of processes that are semantically annotated with this knowledge are overlaid on these schematics.
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
