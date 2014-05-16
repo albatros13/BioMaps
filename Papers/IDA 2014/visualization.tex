@@ -14,22 +14,7 @@ Tiling algorithms used for typical applications of treemaps such as e.g., visual
 For a set of $n$ data items with no positional constraints, a default template is created that consists of $\lfloor \sqrt{n}\, \rfloor$ rows and $\lceil \sqrt{n}\, \rceil$ columns in each row but the last one (which may contain fewer columns). If the positional data is available (e.g., FMA ontology adjacent-to relation) or a user wants to rearrange the data manually, a custom template is associated with the parent node of the dataset items. The template is a hierarchical structure
 $\bigl\{\mathit{splitType}, \{\},\ldots, \{\}\bigr\}$ where $\mathit{splitType} \in \left\{\mathrm{slice}, \mathrm{dice}\right\}$ defines a way to split the rectangle into sub-rectangles: vertically or horizontally. By recursively splitting the available area into sub-rectangles, one can define complex layouts that enforce two dimensional constraints in the form ``$x$ is left/right of $y$'' or ``$x$ is above/below of $y$'' where $x$ and $y$ are individual data items or groups of data items that in their turn can be allocated as needed using the same technique.
 
-The schematic body plans created using template-based treemaps can be seen in \cref{fig:treemaps}. \Cref{fig:24tiles} shows the top level 24 tile body plan in 2D while \cref{fig:24tiles-heart-3d} shows the same view in 3D with the content of one of the tiles, ``Vascular Cardiac'', displayed. Observe that the treemap layout is controlled by the (default) templates and remains stable during the navigation.
-
-\begin{figure*}%
-  % TODO: remove the `BioMaps' title on the top-left. Also for other images.
-  \centering%
-  \subfigure[Top level view in 2D]{
-    \includegraphics[width=5.8cm]{images/24tiles.png}
-    \label{fig:24tiles}
-  }
-  \subfigure[Stable layout in 3D view, one tile enlarged]{
-    \includegraphics[width=5.8cm]{images/24tiles-heart-3d.png}
-    \label{fig:24tiles-heart-3d}
-  }
-  \caption{ApiNATOMY circuitboards}
-  \label{fig:treemaps}
-\end{figure*}
+The schematic body plans created using template-based treemaps can be seen in \cref{fig:treemaps}. \Cref{fig:24tiles} shows the top level 24 tile body plan. The choice of this layout is explained by \cref{fig:tilemap-cylinder}, which shows how it can conceptually wrap around the longitudinal axis of the human body. The treemap layout is controlled by the (default) templates and remains stable during navigation.
 
 
 \subsection{Connectivity data} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,16 +79,19 @@ To obtain this view, we looked for the shortest paths (due to the way the data i
 while the path from this organ to the right atrium is like follows: 
 {$7096 \leftarrow 771 \leftarrow \cdots \leftarrow 9546 \leftarrow 9547 \leftarrow 62528$.}
 
-The first and the last IDs in this path correspond to the tiles in the treemap, while the intermediate IDs will be represented using auxiliary nodes with undefined coordinates. One of the issues we encountered is the need to determine optimal positions for these nodes. Since several paths as above can have common sub-paths, the intermediate nodes should not deviate too much from the way from the heart MC to each of the end tiles sharing such sub-paths. This motivates our application of the sticky force-directed graph visualization method~\cite{FR91,Bos14} in which a sub-set of nodes have fixed coordinates, and the coordinates of the other nodes is determined by simulating imaginary forces applied by their edges.
+The first and the last IDs in this path correspond to the tiles in the treemap, while the intermediate IDs will be represented using auxiliary nodes with undefined coordinates. One of the issues we encountered is the need to determine optimal positions for these nodes. Since several paths as above can have common sub-paths, the intermediate nodes should not deviate too much from the way from the heart MC to each of the end tiles sharing such sub-paths. This motivates our application of the sticky force-directed graph visualization method~\cite{FR91,Bos14} in which a sub-set of nodes have fixed coordinates, and the coordinates of the other nodes is determined by simulating imaginary forces applied by their edges (\cref{fig:bloodvessels}).
 %%%% (MH: seems like an implementation detail)
 % As our only objective is to allocate intermediate nodes as close to the
 % paths they belong to (which most naturally can be represented by straight
 % lines) as possible, we set gravity and charge to 0 and the desired link
 % length to a minimal possible length.
 %%%%
-The extracted connectivity graphs for the left ventricle (7101) is shown in \cref{fig:force-7101}.
 
-If there are too many edges to get a clear overview of the data, we can apply hierarchical edge bundling method that uses the path structure to bundle common sub-paths in the graph obtained during the first stage. The final set of paths from left ventricle and right atrium are shown in \cref{fig:bundled-7101,fig:bundled-7096}, respectively. In these images, both left ventricle and right atrium are descendants of the ``Vascular Cardiac'' tile.
+If there are too many edges to get a clear overview of the data ---as in \cref{fig:force-7101},
+which shows the full connectivity graph for the left ventricle (7101) on the top-level body plan---
+we can apply a hierarchical edge bundling method that uses the path structure to bundle common sub-paths.
+The result for the left ventricle is shown in \cref{fig:bundled-7101}, which gives a much nicer
+overview. The result for the right atrium is shown in \cref{fig:bundled-7096}.
 %%%% (MH: seems like an implementation detail)
 % By setting bundling algorithm tension parameter close to 1 (0.96-0.99),
 % we obtain a view that clearly shows that individual paths extracted from
@@ -112,17 +100,15 @@ If there are too many edges to get a clear overview of the data, we can apply hi
 %%%%
 \begin{figure*}%
   \centering%
+  \subfigure[Blood vessel connections in the heart]{
+    \includegraphics[width=5.8cm]{images/screenshot-bloodvessels.png}
+    \label{fig:bloodvessels} % TODO: refer to this
+  }%
   \subfigure[Arterial connections from left ventricle]{
     \includegraphics[width=5.8cm]{images/force-7101.png}
     \label{fig:force-7101}
   }%
-  \subfigure[Blood vessel connections within the heart]{
-    %\includegraphics[width=5.8cm]{images/force-7096b.png}
-    %\label{fig:force-7096}
-    \hskip5.8cm
-    % TODO: Insert screenshot of blood-vessel connections (inside the heart) from the actual prototype
-  }%
-  \MH{}{Natallia, could you blend the tile-background with 30\% transparency (or whiteness)? You can also just take a screenshot of the prototype after checking `Connections'.}
+  \MH{}{Natallia, please generate path overlays corresponding to the tilemap I sent you by e-mail, to maintain consistency across the paper.}
   \subfigure[Bundled paths from left ventricle]{
     \includegraphics[width=5.8cm]{images/connections-7101.png}
     \label{fig:bundled-7101}
@@ -147,54 +133,40 @@ One of the prime goals of the tool is to simplify the access and maintenance of 
 The entities in the ApiNATOMY taxonomy have various data associated with them. 
 This includes static and dynamic 3D models of body organs and their subsystems. 
 More specifically, we extract and display neuronal reconstructions and associated metadata from \url{http://neuromorpho.org}~\cite{Asc06}.
-\Cref{fig:neuron-big} shows a sample neuron model associated with the neocortex (reached through``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''). ApiNATOMY allows users to create custom body plans and show selected 3D objects in their proper context. For example, \cref{fig:neuron-small} shows a screenshot of a circuit board with the ``Neocortex'' neuron and a 3D model of ``Liver''.
-
-There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown above, such models will react to variables and simulation parameters set by the user. \Cref{fig:simulation} shows a sample data control panel to compare left and right heart performance, as well as mock-ups for parametric generation of conducting airways such as lungs~\cite{TPH00} and bronchial trees~\cite{THT+04}.
-
-The tool also supports the visualization of 2D and 3D protein-protein interaction networks (see \cref{fig:protein}) which are represented as graphs on top of treemap tiles. We are in the process of the acquisition and integration of relevant data from the Ensembl genomic database \MH{\url{http://www.ensembl.org/}}{cite?}. In Ensembl, gene models are annotated automatically using biological sequences data (protein, mRNA) as support. Each gene model includes information such as the genomic coordinates of the gene and its coding and noncoding exon(s). One or more transcripts (nucleotide sequences resulting from the transcription of the genomic DNA to mRNA) may be annotated. One gene can have different transcripts or splice variants resulting from the alternative splicing of different exons in genes. We query the database to extract genes, transcripts, and translations with related protein features such as e.g., PFAN, and associate them with FMA entities. After that, protein domain features are schematically shown with the help of different shapes and colors in 3D environment (\cref{fig:protein-3d}).
+\Cref{fig:neuron-big} shows a sample neuron model associated with the neocortex (reached through``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''). ApiNATOMY allows users to show multiple 3D objects together in their proper context. For example, \cref{fig:neuron-small} shows a screenshot of a circuit board with the ``Neocortex'' neuron, as well as 3D models of the ``Liver'' and ``Stomach''.
 
 \begin{figure*}
 \centering
-  \subfigure[Neuron associated with ``Neocortex'' tile]{
-    \includegraphics[width=6.8cm]{images/neuron-big.png}
+  \subfigure[Neuron in the ``Neocortex'']{
+    \includegraphics[width=5.4cm]{images/screenshot-neocortex-neuron.png}
     \label{fig:neuron-big}
   }
-  \subfigure[Contextual view for ``Nervous Cephalic'']{
-    \includegraphics[width=4.8cm]{images/neuron-small.png}
+  \subfigure[Multiple 3D models in context]{
+    \includegraphics[width=5.4cm]{images/screenshot-3d-objects.png}
     \label{fig:neuron-small}
-  }
-  \caption{Static 3D objects}
+  }\vskip2mm
+  \caption{Visualization of static 3D models}
   \label{fig:neurons}
 \end{figure*}
 
-\begin{figure*}
+There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown in \cref{fig:neurons}, such models will react to variables and simulation parameters set by the user.
+
+ApiNATOMY also supports the visualization of protein interaction networks (\cref{fig:protein}) which are represented as graphs on top of treemap tiles. We are in the process of the acquisition and integration of relevant data from the Ensembl genomic database \MH{\url{http://www.ensembl.org/}}{cite?}. In Ensembl, gene models are annotated automatically using biological sequences data (protein, mRNA) as support. Each gene model includes information such as the genomic coordinates of the gene and its coding and noncoding exon(s). One or more transcripts (nucleotide sequences resulting from the transcription of the genomic DNA to mRNA) may be annotated. One gene can have different transcripts or splice variants resulting from the alternative splicing of different exons in genes. We query the database to extract genes, transcripts, and translations with related protein features such as e.g., PFAN, and associate them with FMA entities. After that, protein domain features are schematically shown with the help of different shapes and colors in a 3D environment (\cref{fig:protein-3d}).
+
+\begin{figure*} 
 \centering
-  \subfigure[Simulation control panel]{
-    \includegraphics[width=5cm]{images/simulation.png}
-    \label{fig:panel}
-  }
-%%%% Removed, as requested by Bernard; they will be used in a later paper
-%  \subfigure[Parametric visualization]{
-%    \includegraphics[width=5cm]{images/tree-generation-3d.png}
-%    \label{fig:tree-generation-3d}
-%  }
-%  \end{tabular}
-%  }
-%  \subfigure[Conducting airways generation: mock-up]{
-%    \includegraphics[width=6cm]{images/tree-generation.png}
-%    \label{fig:tree-generation}
-%  }
-  \MH{}{TODO}
-  \subfigure[Protein structure in 2D]{
-    %\includegraphics[width=4.1cm]{images/protein.png}
-    \hskip4.1cm
-    \label{fig:protein}
-  }
-  \subfigure[Protein features in 3D]{
-    %\includegraphics[width=7.5cm]{images/protein-3d.png}
-    \hskip7.5cm
-    \label{fig:protein-3d}
-  }
-  \caption{Dynamic 3D objects}
-  \label{fig:simulation}
+%	\subfigure[Simulation control panel]{
+%		\includegraphics[width=5cm]{images/simulation.png}
+%		\label{fig:panel}
+%	}
+	\subfigure[Protein interactions in 2D]{
+		\includegraphics[width=5.4cm]{images/screenshot-proteins.png}
+		\label{fig:protein}
+	}
+	\subfigure[Protein features in 3D]{
+		\includegraphics[width=5.4cm]{images/screenshot-proteins-3d.png}
+		\label{fig:protein-3d}
+	}
+	\caption{Visualizing protein expression, protein interaction and protein features}
+	\label{fig:proteins}
 \end{figure*}
