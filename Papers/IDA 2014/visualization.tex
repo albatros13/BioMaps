@@ -125,9 +125,8 @@ One of the prime goals of the tool is to simplify the access and maintenance of 
 \section{Visualization of Models and Metadata} \label{sect:visualization2}               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The entities in the ApiNATOMY taxonomy have various data associated with them. 
-This includes static and dynamic 3D models of body organs and their subsystems. 
-More specifically, we extract and display neuronal reconstructions and associated metadata from \url{http://neuromorpho.org}~\cite{Asc06}.
+The entities in the ApiNATOMY ontologies have various data associated with them, to which they are explicitly linked via semantic metadata annotations. This includes, for instance, static and dynamic 3D models of body organs and their subsystems. 
+To illustrate the application of ApiNATOMY in the management of semantic metadata and associated resources, we extract and display neuronal reconstructions and associated metadata from \url{http://neuromorpho.org}~\cite{Asc06}.
 \Cref{fig:neuron-big} shows a sample neuron model associated with the neocortex (reached through``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''). ApiNATOMY allows users to show multiple 3D objects together in their proper context. For example, \cref{fig:neuron-small} shows a screenshot of a circuit board with the ``Neocortex'' neuron, as well as 3D models of the ``Liver'' and ``Stomach''.
 
 \begin{figure*}
@@ -144,9 +143,7 @@ More specifically, we extract and display neuronal reconstructions and associate
   \label{fig:neurons}
 \end{figure*}
 
-There is ongoing work on the programmatic generation of parameterized 3D models of anatomical organs. In contrast to the static models as shown in \cref{fig:neurons}, such models will react to variables and simulation parameters set by the user.
-
-ApiNATOMY also supports the visualization of protein interaction networks (\cref{fig:protein}) which are represented as graphs on top of treemap tiles. We are in the process of the acquisition and integration of relevant data from the Ensembl genomic database \MH{\url{http://www.ensembl.org/}}{cite?}. In Ensembl, gene models are annotated automatically using biological sequences data (protein, mRNA) as support. Each gene model includes information such as the genomic coordinates of the gene and its coding and noncoding exon(s). One or more transcripts (nucleotide sequences resulting from the transcription of the genomic DNA to mRNA) may be annotated. One gene can have different transcripts or splice variants resulting from the alternative splicing of different exons in genes. We query the database to extract genes, transcripts, and translations with related protein features such as e.g., PFAN, and associate them with FMA entities. After that, protein domain features are schematically shown with the help of different shapes and colors in a 3D environment (\cref{fig:protein-3d}).
+ApiNATOMY also supports the visualization of protein- and drug-interaction networks (\cref{fig:protein}) that are represented as graphs on top of treemap tiles. We are in the process of acquiring and integrating relevant data from the Ensembl genomic database \MH{\url{http://www.ensembl.org/}}{cite?}. In Ensembl, gene models are annotated automatically using biological sequences data (e.g. protein, mRNA). We query this database to extract genes, transcripts, and translations with related protein features such as e.g., PFAM domains, and locate automatically-generated diagrams of proteins with FMA tiles to represent the anatomical location in which they are expressed. For ease of visualisation, protein diagrams show domain features built from different shapes and colors in a navigable 3D environment (\cref{fig:protein-3d}).
 
 \begin{figure*} 
 \centering
