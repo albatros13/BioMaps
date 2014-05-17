@@ -6,7 +6,11 @@ In this section, we briefly discuss core use cases for the ApiNATOMY application
 
 The domains of genomics and drug discovery are dependent on physiology knowledge, as both domains take into account the manufacture of gene products in different parts of the body and the regulated long-distance transport of molecules that interact with these products. The location of gene product manufacture (i.e. gene expression data, such as~\cite{EBI}), as well as routes associated with pharmacokinetic modeling of molecular interactors (drawn from resources such as~\cite{HMC+13}) may be usefully depicted in the form of a physiology \emph{circuitboard}.
 
-In ApiNATOMY, a physiology circuitboard schematic consists of a combination of (i) an anatomical treemap and (ii) an overlay of process graphs. In our earlier prototypes (described in~\cite{BGS12,KBK14}), templates were applied to constrain the layout of tiles in treemaps of the Foundational Model of Anatomy (FMA)~\cite{RM03} ontology, such that nesting of one tile inside another indicates that the child tile is either a \emph{part} or a \emph{subclass} of the parent tile. The Graphical User Interface (GUI) providing the interaction with the circuitboard allows point-and-click navigation of the treemap content. This type of interaction extends to also to involve process graphs - in this paper we report on the graphical projection of routes of (i) blood flow processes linking different regions of the human body (using data generated in~\cite{deB11}), as well as (ii) transport processes along neurons of the central nervous system (i.e. brain and spinal cord) with data obtained via the Neuroscience Information Framework~\cite{Gar+08}.
+In ApiNATOMY, a physiology circuitboard schematic consists of a combination of (i) an anatomical treemap and (ii) an overlay of process graphs. In our earlier prototypes (described in~\cite{BGS12,KBK14}), templates were applied to constrain the layout of tiles in treemaps of the Foundational Model of Anatomy (FMA)~\cite{RM03} ontology, such that nesting of one tile inside another indicates that the term asscoiated with the child tile is either a mereotopological \emph{part} or a \emph{subclass} of the term associated with the parent tile. 
+
+In the following sections, we discuss our early-stage results in the construction of an ApiNATOMY Graphical User Interface (GUI) that supports user interaction with the circuitboard via point-and-click navigation of the treemap content. This type of interaction extends to also to involve process graphs.
+
+Specifically, we report on the graphical projection of routes of (i) blood flow processes linking different regions of the human body (using data generated in~\cite{deB11}), as well as (ii) transport processes along neurons of the central nervous system (i.e. brain and spinal cord) with data obtained via the Neuroscience Information Framework~\cite{Gar+08}. 
 
 The ApiNATOMY Graphical User Interface is built from inception as a three dimensional (3D) environment. This facilitates interaction not only with 3D renderings of the circuit boards themselves, but also with a wide range of geometry/mesh formats for volumetric models of biological structure across scales. For instance, it is already possible to overlay Wavefront .obj data from BodyParts3D~\cite{MFT+09} as well as SWC data provided by neuromorpho.org~\cite{Asc06}.
 % TODO: acknowledge the contribution of SharkViewer to our rendering of .swc files
@@ -15,11 +19,11 @@ The ApiNATOMY Graphical User Interface is built from inception as a three dimens
 % SWC File Format Specification: http://research.mssm.edu/cnic/swc.html
 % I have asked the SharkViewer people how they'd like to be cited: https://github.com/JaneliaSciComp/SharkViewer/issues/4
 
-In the following sections, we discuss:
+In particular, we discuss:
 \begin{itemize}
   \item the constraining of treemap layouts to generate stable anatomical treemaps,
-  \item the design and overlay of communication routes for the cardiovascular and neural systems, and
-  \item the querying and 3D depiction of protein architecture schematics for the anatomical overview of gene expression data.
+  \item the design and overlay of physiological communication routes for the cardiovascular and neural systems, and
+  \item the querying and 3D depiction of protein architecture schematics for the anatomical overview of gene expression data and mathematical models relevant to genomics and drug discovery research.
 \end{itemize}
 
 \begin{figure}%
