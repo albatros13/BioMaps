@@ -21,14 +21,11 @@ The schematic body plans created using template-based treemaps can be seen in \c
 
 With the treemap-based body plans as background, we overlay the schematic representation of \emph{body systems} such as circulatory, respiratory, or nervous systems. Body systems are essentially graphs with nodes corresponding to body parts (treemap tiles) or entities inside of body parts (proteins, cells, etc.), and their edges represent organ system compounds such as blood vessels or nervous connections that pass through such body parts or sub-parts.
 %%
-They may also contain auxiliary nodes that are not represented on the treemap but still carry important biomedical information. 
+They may also contain auxiliary nodes that are not represented on the treemap but still carry important biomedical information.
 
 Body systems are intrinsically complex and require efficient data visualization techniques to help avoid clutter induced by the large amount of graph edges and their crossings. To support the GUI functionality, body systems must allow users to overview large parts of the body systems as well as to trace individual connections and analyze their structure. In this context, edge bundling techniques~\cite{Hol06,GHN+11,HET12} have been proposed to improve perception of connectivity data in large dense graphs. Such techniques generally rely on edge rerouting strategies that are either solely targeted at improving visual perception (by using the positions of nodes) or exploit the relationships among connectivity data as guidelines for a more natural allocation of graph edges and nodes. Our application requires a mixture of these techniques.
 
-As an example, consider the schematic visualization of blood vessels in human body. Our initial dataset is a graph based on the FMA resoure, and consists of approximately 11,300 edges and over 10,000 distinct nodes. In this case, an edge represents a flow process over an unbranched segment of a blood vessel. Nodes represent blood vessel junctions and end-points. Samples of records from the dataset are shown in \cref{tab:vascular-connectivity}. The first column in the dataset is a unique vascular segment identifier (ID). The second column bears the vessel type, i.e. any one of four numbers that give \MH{}{Probably much of the information in the next two paragraphs could be cut.} an indication of the biological type of segment:
-1 - for arterial segment, 2 - microcirculation (MC), there are three types of MC edges: arteriole, capillary and venule, 3 - venous, and 4 - cardiac chamber.
-The third column bears FMA IDs. For non-MC edges (i.e. vessels of type 1, 3 or 4) the number in this column is the FMA ID of the blood vessel of which that segment is part (e.g. there are over 50 segments/edges that form part of the trunk of the aorta). For MC edges (type 2), the FMA ID is that of the body region in which the MC is embedded. The fourth and fifth columns in the dataset bear the unique node identifiers in an edge pair.
-The sixth column is a free-text label describing that segment (i.e. edge).
+As an example, consider the schematic visualization of blood vessels in human body. Our initial dataset is a graph based on the FMA resource, and consists of approximately 11,300 edges and over 10,000 distinct nodes. In this graph, an edge represents a flow process over an unbranched segment of a blood vessel. Nodes represent blood vessel junctions and end-points. Samples of records from the dataset are shown in \cref{tab:vascular-connectivity}. The first column in the dataset is a unique vascular segment identifier (ID), the second column bears the biological type of segment (1 - for arterial segment, 2 - microcirculation (MC), 3 - venous, and 4 - cardiac chamber), the third represents FMA IDs, the fourth and fifth are unique node identifiers in an edge pair, and the last column is a free-text description.
 
 \begin{table}
 \caption{Vascular connectivity data from the FMA ontology}
@@ -52,11 +49,9 @@ venular side of the Wall of left inferior lobar bronchus MC \\
 \label{tab:vascular-connectivity}
 \end{table}
 
-To describe routes of blood passage through the heart, it is important to distinguish between cardiac chambers, (i.e. main lumen of left ventricle, left atrium, right ventricle or right atrium) and the blood supply (i.e. MCs) to the wall of heart (e.g. wall of left ventricle (FMA ID 7101), left atrium (7097), right ventricle (7098) or right atrium (7096)). There are two ways by which blood passes through the heart: (i) though the chambers and (ii) through its walls. Consequently, we exclude cardiac chamber segments from consideration as they are redundant for the representation of vascular connectivity data in our application.
 An MC is represented by three edges connected in series: one edge represents tissue arterioles, a second edge stands for the bed of
 capillaries, while a third denotes the venules. In one MC, therefore: a) the end node of the arteriolar edge and the start node of the
-capillary edge are equivalent, and b) the end node of the capillary edge and the end node of the venular
-edge are equivalent.
+capillary edge are equivalent, and b) the end node of the capillary edge and the end node of the venular edge are equivalent.
 
 In the above example, the anatomical entity in which the MC is embedded is 62528 - the topology of MC segment connectivity is as follows:
 \[
@@ -68,10 +63,10 @@ In the above example, the anatomical entity in which the MC is embedded is 62528
 MC segment 121a is supplied with blood by the arterial segment 8499 while MC segment 121v is drained of blood by the venous segment 9547.
 
 The accurate visualization of the cardiovascular system in a comprehensible way requires complex pre-processing (about 12 rules were identified to extract the data of interest from the presented dataset by a biomedical expert in our team).
-In this paper, for illustration purpose we show only paths connecting MCs of the walls of the heart to MCs belonging to the sub-organs of the organs in our upper level 24 tile body plan.
-To obtain this view, we looked for the shortest paths (due to the way the data is represented in the initial data set, cycles are possible) from the MCs of the heart walls to the final FMA tiles. For example, the path from the left ventricle to the wall of left inferior lobar bronchus MC looks like 
+In this paper, for illustration purpose we show only paths connecting MCs of the walls of the heart (i.e., wall of left ventricle (FMA ID 7101), left atrium (7097), right ventricle (7098) or right atrium (7096)) to MCs belonging to the sub-organs of the organs in our upper level 24 tile body plan.
+To obtain this view, we looked for the shortest paths (due to the way the data is represented in the initial data set, cycles are possible) from the MCs of the heart walls to the final FMA tiles. For example, the path from the left ventricle to the wall of left inferior lobar bronchus MC looks like
 {$7101 \rightarrow 2406 \rightarrow \cdots \rightarrow 8499 \rightarrow 62528$,}
-while the path from this organ to the right atrium is like follows: 
+while the path from this organ to the right atrium is like follows:
 {$7096 \leftarrow 771 \leftarrow \cdots \leftarrow 9546 \leftarrow 9547 \leftarrow 62528$.}
 
 The first and the last IDs in this path correspond to the tiles in the treemap, while the intermediate IDs will be represented using auxiliary nodes with undefined coordinates. One of the issues we encountered is the need to determine optimal positions for these nodes. Since several paths as above can have common sub-paths, the intermediate nodes should not deviate too much from the way from the heart MC to each of the end tiles sharing such sub-paths. This motivates our application of the sticky force-directed graph visualization method~\cite{FR91,Bos14} in which a sub-set of nodes have fixed coordinates, and the coordinates of the other nodes is determined by simulating imaginary forces applied by their edges (\cref{fig:bloodvessels}).
@@ -124,7 +119,7 @@ One of the prime goals of the tool is to simplify the access and maintenance of 
 \section{Visualization of Models and Metadata} \label{sect:visualization2}               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The entities in the ApiNATOMY ontologies have various data associated with them, to which they are explicitly linked via semantic metadata annotations. This includes, for instance, static and dynamic 3D models of body organs and their subsystems. 
+The entities in the ApiNATOMY ontologies have various data associated with them, to which they are explicitly linked via semantic metadata annotations. This includes, for instance, static and dynamic 3D models of body organs and their subsystems.
 To illustrate the application of ApiNATOMY in the management of semantic metadata and associated resources, we extract and display neuronal reconstructions and associated metadata from \url{http://neuromorpho.org}~\cite{Asc06}.
 \Cref{fig:neuron-big} shows a sample neuron model associated with the neocortex (reached through``Nervous Cephalic'' $\rightarrow$ ``Region of cerebral cortex'' $\rightarrow$ ``Neocortex''). ApiNATOMY allows users to show multiple 3D objects together in their proper context. For example, \cref{fig:neuron-small} shows a screenshot of a circuit board with the ``Neocortex'' neuron, as well as 3D models of the ``Liver'' and ``Stomach''.
 
@@ -142,9 +137,9 @@ To illustrate the application of ApiNATOMY in the management of semantic metadat
   \label{fig:neurons}
 \end{figure*}
 
-ApiNATOMY also supports the visualization of protein- and drug-interaction networks (\cref{fig:protein}) that are represented as graphs on top of treemap tiles. We are in the process of acquiring and integrating relevant data from the Ensembl genomic database \MH{\url{http://www.ensembl.org/}}{cite?}. In Ensembl, gene models are annotated automatically using biological sequences data (e.g. protein, mRNA). We query this database to extract genes, transcripts, and translations with related protein features such as e.g., PFAM domains, and locate automatically-generated diagrams of proteins with FMA tiles to represent the anatomical location in which they are expressed. For ease of visualisation, protein diagrams show domain features built from different shapes and colors in a navigable 3D environment (\cref{fig:protein-3d}).
+ApiNATOMY also supports the visualization of protein- and drug-interaction networks (\cref{fig:protein}) that are represented as graphs on top of treemap tiles. We are in the process of acquiring and integrating relevant data from the Ensembl genomic database~\cite{Ensemble}. In Ensembl, gene models are annotated automatically using biological sequences data (e.g. protein, mRNA). We query this database to extract genes, transcripts, and translations with related protein features such as e.g., PFAM domains, and locate automatically-generated diagrams of proteins with FMA tiles to represent the anatomical location in which they are expressed. For ease of visualisation, protein diagrams show domain features built from different shapes and colors in a navigable 3D environment (\cref{fig:protein-3d}).
 
-\begin{figure*} 
+\begin{figure*}
 \centering
 %	\subfigure[Simulation control panel]{
 %		\includegraphics[width=5cm]{images/simulation.png}
