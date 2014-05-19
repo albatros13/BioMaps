@@ -93,28 +93,27 @@ overview. The result for the right atrium is shown in \cref{fig:bundled-7096}.
 % our dataset form ``highways'' which correspond to major arteries and
 % veins in the human body.
 %%%%
-\begin{figure*}%
+\begin{figure}[h]%
   \centering%
-  \subfigure[Blood vessel connections in the heart]{
+  \subfigure[Selected blood vessel connections]{
     \includegraphics[width=5.8cm]{images/screenshot-bloodvessels.png}
     \label{fig:bloodvessels} % TODO: refer to this
   }%
   \subfigure[Arterial connections from left ventricle]{
-    \includegraphics[width=5.8cm]{images/force-7101.png}
+    \includegraphics[width=5.8cm,height=3.855cm]{images/force-7101-new.png}
     \label{fig:force-7101}
-  }%
-  \MH{}{Natallia, please generate path overlays corresponding to the tilemap I sent you by e-mail, to maintain consistency across the paper.}
+  }\vskip-2mm
   \subfigure[Bundled paths from left ventricle]{
-    \includegraphics[width=5.8cm]{images/connections-7101.png}
+    \includegraphics[width=5.8cm,height=3.855cm]{images/connections-7101-new.png}
     \label{fig:bundled-7101}
   }%
   \subfigure[Bundled paths to right atrium]{
-    \includegraphics[width=5.8cm]{images/connections-7096b.png}
+    \includegraphics[width=5.8cm,height=3.855cm]{images/connections-7096b-new.png}
     \label{fig:bundled-7096}
-  }%
+  }\vskip1mm
   \caption{Cardiovascular system}
   \label{fig:vascular-connectivity}
-\end{figure*}
+\end{figure}
 
 After a one-time pre-processing to import data from available external sources, we store connectivity data in a convenient format. A user can interact with and edit this data using our application.
 
