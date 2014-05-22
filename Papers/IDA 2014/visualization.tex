@@ -28,24 +28,22 @@ Body systems are intrinsically complex and require efficient data visualization 
 As an example, consider the schematic visualization of blood vessels in human body. Our initial dataset is a graph based on the FMA resource, and consists of approximately 11,300 edges and over 10,000 distinct nodes. In this graph, an edge represents a flow process over an unbranched segment of a blood vessel. Nodes represent blood vessel junctions and end-points. Samples of records from the dataset are shown in \cref{tab:vascular-connectivity}. The first column in the dataset is a unique vascular segment identifier (ID), the second column bears the biological type of segment (1 - for arterial segment, 2 - microcirculation (MC), 3 - venous, and 4 - cardiac chamber), the third represents FMA IDs, the fourth and fifth are unique node identifiers in an edge pair, and the last column is a free-text description.
 
 \begin{table}
-\caption{Vascular connectivity data from the FMA ontology}
-\begin{tabular}{|l|l|l|l|l|p{7cm}|}
+	\def\vdt{\hskip1pt\vdots}
+\begin{tabular}{l@{\ }l@{\ }l@{\ }l@{\ }l@{\ }|@{\ }p{6.2cm}}
+  \textbf{Segment} & \textbf{Type} & \textbf{FMA} & \textbf{Node 1} & \textbf{Node 2} & \textbf{Description} \\
   \hline
-  Segment & Type & FMA & Node 1 & Node 2 & Description \\
-  \hline
-  121a & 2 & 62528 & 62528\_2 & 62528\_4 & Arterioles in Microcirculation segment of Wall of left inferior lobar bronchus \\
-  121c & 2 & 62528 & 62528\_4 & 62528\_5 & Capillaries in Microcirculation segment of Wall of left inferior lobar bronchus\\
-  121v & 2 & 62528 & 62528\_3 & 62528\_5 & Venules in Microcirculation segment of Wall of left inferior lobar bronchus\\
-  ... &... & ...   & ...      & ...      & ...\\
-  8499 & 1 & 69333 & 8498\_0 & 62528\_2  & Arterial Segment 8499 of Trunk
+  121a   & 2      & 62528  & 62528\_2 & 62528\_4  & Arterioles in Microcirculation segment of Wall of left inferior lobar bronchus \\[.5mm]
+  121c   & 2      & 62528  & 62528\_4 & 62528\_5  & Capillaries in Microcirculation segment of Wall of left inferior lobar bronchus\\[.5mm]
+  121v   & 2      & 62528  & 62528\_3 & 62528\_5  & Venules in Microcirculation segment of Wall of left inferior lobar bronchus\\[.5mm]
+  \vdt & \vdt & \vdt & \vdt   & \vdt    & \vdt \\[.5mm]
+  8499   & 1      & 69333  & 8498\_0  & 62528\_2  & Arterial Segment 8499 of Trunk
 of left second bronchial artery from origin of supplying terminal segment
-to the arteriolar side of the Wall of left inferior lobar bronchus
-MC\\
+to the arteriolar side of the Wall of left inferior lobar bronchus MC\\[.5mm]
   9547 & 3 & 66699 & 9546\_0 & 62528\_3 & Venous Segment 9547 of Trunk of
 left bronchial vein from origin of supplying terminal segment to the
-venular side of the Wall of left inferior lobar bronchus MC \\
-  \hline
-\end{tabular}
+venular side of the Wall of left inferior lobar bronchus MC
+\end{tabular}\vskip2mm
+\caption{Vascular connectivity data from the FMA ontology}
 \label{tab:vascular-connectivity}
 \end{table}
 
@@ -88,7 +86,7 @@ overview. The result for the right atrium is shown in \cref{fig:bundled-7096}.
 % our dataset form ``highways'' which correspond to major arteries and
 % veins in the human body.
 %%%%
-\begin{figure}[h]%
+\begin{figure}[ht]%
   \centering%
   \subfigure[Selected blood vessel connections]{
     \includegraphics[width=5.8cm]{images/screenshot-bloodvessels.png}
@@ -132,7 +130,7 @@ To illustrate the application of ApiNATOMY in the management of semantic metadat
   \subfigure[Multiple 3D models in context]{
     \includegraphics[width=5.4cm]{images/screenshot-3d-objects.png}
     \label{fig:neuron-small}
-  }\vskip2mm
+  }\vskip1mm
   \caption{Visualization of static 3D models}
   \label{fig:neurons}
 \end{figure*}
@@ -152,7 +150,7 @@ ApiNATOMY also supports the visualization of protein- and drug-interaction netwo
 	\subfigure[Protein features in 3D]{
 		\includegraphics[width=5.4cm]{images/screenshot-proteins-3d.png}
 		\label{fig:protein-3d}
-	}
+	}\vskip1mm
 	\caption{Visualizing protein expression, protein interaction and protein features}
 	\label{fig:proteins}
 \end{figure*}
