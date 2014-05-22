@@ -2,12 +2,24 @@
 \section{Implementation} \label{sect:implementation}                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure*}
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=6cm]{images/visual-layers.png}
-	\caption{The three layers of circuitboard visualization.}
+	\hskip1mm
+	\begin{tabular}[b]{lcl}
+		\multicolumn{3}{l}{\textbf{Able to Control Position:}}     \\[1mm]
+		Three.js Canvas     & $\longrightarrow$ & HTML Treemap     \\[1mm]
+		Three.js Canvas     & $\longrightarrow$ & D3.js Layer      \\[3mm]
+		
+		\multicolumn{3}{l}{\textbf{Able to Add Content:}}          \\[1mm]
+		HTML Treemap        & $\longrightarrow$ & D3.js Layer      \\[1mm]
+		HTML Treemap        & $\longrightarrow$ & Three.js Canvas  \\[1mm]
+		D3.js Layer         & $\longrightarrow$ & Three.js Canvas  \\[10mm]\phantom{x}%hack
+	\end{tabular}
+	\vskip1mm
+	\caption{The three layers of circuitboard visualization and their interaction.}
 	\label{fig:visual-layers}
-\end{figure*}
+\end{figure}
 
 In this section we discuss a number of implementation aspects of \mbox{ApiNATOMY}.
 For maximum compatibility across operating systems as well as handheld devices,
