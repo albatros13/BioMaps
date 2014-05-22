@@ -32,11 +32,11 @@ As an example, consider the schematic visualization of blood vessels in human bo
 \begin{tabular}{l@{\ }l@{\ }l@{\ }l@{\ }l@{\ }|@{\ }p{6.2cm}}
   \textbf{Segment} & \textbf{Type} & \textbf{FMA} & \textbf{Node 1} & \textbf{Node 2} & \textbf{Description} \\
   \hline
-  121a   & 2      & 62528  & 62528\_2 & 62528\_4  & Arterioles in Microcirculation segment of Wall of left inferior lobar bronchus \\[.5mm]
-  121c   & 2      & 62528  & 62528\_4 & 62528\_5  & Capillaries in Microcirculation segment of Wall of left inferior lobar bronchus\\[.5mm]
-  121v   & 2      & 62528  & 62528\_3 & 62528\_5  & Venules in Microcirculation segment of Wall of left inferior lobar bronchus\\[.5mm]
-  \vdt & \vdt & \vdt & \vdt   & \vdt    & \vdt \\[.5mm]
-  8499   & 1      & 69333  & 8498\_0  & 62528\_2  & Arterial Segment 8499 of Trunk
+  121a   & 2    & 62528  & 62528\_2 & 62528\_4  & Arterioles in Microcirculation segment of Wall of left inferior lobar bronchus \\[.5mm]
+  121c   & 2    & 62528  & 62528\_4 & 62528\_5  & Capillaries in Microcirculation segment of Wall of left inferior lobar bronchus\\[.5mm]
+  121v   & 2    & 62528  & 62528\_3 & 62528\_5  & Venules in Microcirculation segment of Wall of left inferior lobar bronchus\\[.5mm]
+  \vdt   & \vdt & \vdt   & \vdt     & \vdt      & \vdt  \\[.5mm]
+  8499   & 1    & 69333  & 8498\_0  & 62528\_2  & Arterial Segment 8499 of Trunk
 of left second bronchial artery from origin of supplying terminal segment
 to the arteriolar side of the Wall of left inferior lobar bronchus MC\\[.5mm]
   9547 & 3 & 66699 & 9546\_0 & 62528\_3 & Venous Segment 9547 of Trunk of
@@ -64,7 +64,7 @@ The accurate visualization of the cardiovascular system in a comprehensible way 
 In this paper, for illustration purpose we show only paths connecting MCs of the walls of the heart (i.e., wall of left ventricle (FMA ID 7101), left atrium (7097), right ventricle (7098) or right atrium (7096)) to MCs belonging to the sub-organs of the organs in our upper level 24 tile body plan.
 To obtain this view, we looked for the shortest paths (due to the way the data is represented in the initial data set, cycles are possible) from the MCs of the heart walls to the final FMA tiles. For example, the path from the left ventricle to the wall of left inferior lobar bronchus MC looks like
 {$7101 \rightarrow 2406 \rightarrow \cdots \rightarrow 8499 \rightarrow 62528$,}
-while the path from this organ to the right atrium is like follows:
+and the path from there to the right atrium is
 {$7096 \leftarrow 771 \leftarrow \cdots \leftarrow 9546 \leftarrow 9547 \leftarrow 62528$.}
 
 The first and the last IDs in this path correspond to the tiles in the treemap, while the intermediate IDs will be represented using auxiliary nodes with undefined coordinates. One of the issues we encountered is the need to determine optimal positions for these nodes. Since several paths as above can have common sub-paths, the intermediate nodes should not deviate too much from the way from the heart MC to each of the end tiles sharing such sub-paths. This motivates our application of the sticky force-directed graph visualization method~\cite{FR91,Bos14} in which a sub-set of nodes have fixed coordinates, and the coordinates of the other nodes is determined by simulating imaginary forces applied by their edges (\cref{fig:bloodvessels}).
