@@ -17,7 +17,8 @@ two-way databinding. Connectivity- and protein-protein
 interaction diagrams~(\cref{fig:vascular-connectivity,fig:protein})
 are generated using D3.js, and all 3D functionality~(\cref{fig:neurons,fig:protein-3d})
 is implemented using Three.js, which provides a convenient abstraction layer over WebGL.
-% TODO: citations for the various technologies
+
+
 
 %\subsection{Circuitboard Layers} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -31,8 +32,11 @@ Besides rendering 3D objects with WebGL, it can manipulate HTML
 elements using CSS 3D transforms. When using both rendering engines
 in conjunction, Three.js can keep WebGL and HTML perfectly synchronized.
 Together with AngularJS two-way databinding, we get very fine control
-of positioning. This is demonstrated particularly well by \cref{fig:protein-3d}.
-
+of positioning. This is demonstrated particularly well in \cref{fig:protein-3d}.
+%%
+To render \texttt{.swc} neuron files (\cref{fig:neurons}), ApiNATOMY uses SharkViewer,
+an open source Three.js library
+developed by the Howard Hughes Medical Institute~\cite{weaver_sharkviewer_2014}.
 
 %\subsection{Focus and Direct Feedback} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
