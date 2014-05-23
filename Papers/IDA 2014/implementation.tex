@@ -2,6 +2,15 @@
 \section{Implementation} \label{sect:implementation}                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+In this section we discuss a number of implementation aspects of \mbox{ApiNATOMY}.
+For maximum compatibility across operating systems as well as handheld devices,
+the whole application is written in Javascript. The main framework in use is
+AngularJS, which provides a Model-View-Controller architecture, as well as
+two-way databinding. Connectivity- and protein-protein
+interaction diagrams~(\cref{fig:vascular-connectivity,fig:protein})
+are generated using D3.js, and all 3D functionality~(\cref{fig:neurons,fig:protein-3d})
+is implemented using Three.js, which provides a convenient abstraction layer over WebGL.
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=6cm]{images/visual-layers.png}
@@ -20,15 +29,6 @@
 	\caption{The three layers of circuitboard visualization and their interaction.}
 	\label{fig:visual-layers}
 \end{figure}
-
-In this section we discuss a number of implementation aspects of \mbox{ApiNATOMY}.
-For maximum compatibility across operating systems as well as handheld devices,
-the whole application is written in Javascript. The main framework in use is
-AngularJS, which provides a Model-View-Controller architecture, as well as
-two-way databinding. Connectivity- and protein-protein
-interaction diagrams~(\cref{fig:vascular-connectivity,fig:protein})
-are generated using D3.js, and all 3D functionality~(\cref{fig:neurons,fig:protein-3d})
-is implemented using Three.js, which provides a convenient abstraction layer over WebGL.
 
 
 
