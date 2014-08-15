@@ -121,22 +121,40 @@ Consider the blood vessels in the human body. Our initial dataset on this is a g
 	\label{tab:vascular-connectivity}
 \end{table}
 
-A \emph{microcirculation (MC)} is represented by three edges connected in series: one representing tissue arterioles, a second for the bed of capillaries, and a third for the venules. In \cref{tab:vascular-connectivity}, the anatomical entity in which the MC is embedded is 62528 (``Wall of left inferior lobar bronchus''). The topology of its MC segment connectivity is as follows:
+A \emph{microcirculation (MC)} is represented by three edges connected in series: one representing
+tissue arterioles, a second for the bed of capillaries, and a third for the venules. In
+\cref{tab:vascular-connectivity}, the anatomical entity in which the MC is embedded is 62528
+(``Wall of left inferior lobar bronchus''). The topology of its MC segment connectivity is as
+follows:
 \[
 	62528\_2  \;\xrightarrow{\;\text{121a}\;}\;
 	62528\_4  \;\xrightarrow{\;\text{121c}\;}\;
 	62528\_5  \;\xleftarrow {\;\text{121v}\;}\;
 	62528\_3  \text.
 \]
-MC segment 121a is supplied with blood by the arterial segment 8499, and MC segment 121v is drained of blood by the venous segment 9547.
+MC segment 121a is supplied with blood by the arterial segment 8499, and MC segment 121v is drained
+of blood by the venous segment 9547.
 
-The accurate and comprehensible visualization of the cardiovascular system requires complex pre-processing; a biomedical expert in our team identified about 12 rules for the extraction of relevant data from the full dataset.
-For illustration purpose, \cref{fig:vascular-connectivity} shows only paths connecting MCs of the walls of the heart (i.e., wall of left ventricle, left atrium, right ventricle or right atrium) to MCs belonging to the sub-organs of the tiles in our upper level 24 tile body plan. To obtain this view, we looked for the shortest paths --- due to the way the data is represented in the initial data set, cycles are possible. For example, the path from the left ventricle to the wall of left inferior lobar bronchus MC is
+The accurate and comprehensible visualization of the cardiovascular system requires complex
+pre-processing; a biomedical expert in our team identified about 12 rules for the extraction of
+relevant data from the full dataset.
+For illustration purposes, \cref{fig:vascular-connectivity} shows only paths connecting MCs of the
+walls of the heart to MCs belonging to the sub-organs of the tiles in our upper level 24 tile body
+plan. To obtain this view, we looked for the shortest paths --- due to the way the data is represented
+in the initial data set, cycles are possible. For example, the path from the left ventricle to the
+wall of left inferior lobar bronchus MC is
 {$7101 \rightarrow 2406 \rightarrow \cdots \rightarrow 8499 \rightarrow 62528$,}
 and the path from there to the right atrium is
 {$7096 \leftarrow 771 \leftarrow \cdots \leftarrow 9546 \leftarrow 9547 \leftarrow 62528$.}
 
-The first and the last IDs in this path correspond to the tiles in the treemap, while the intermediate IDs will be represented using auxiliary nodes with undefined coordinates. One of the issues we encountered is the need to determine optimal positions for these nodes. Since several paths can have common sub-paths, as shown in \cref{fig:bloodvessels}, the intermediate nodes should be positioned so as to minimize the overall path length. This motivates our application of the \emph{sticky force-directed graph visualization} method~\cite{FR91,Bos14} in which a sub-set of nodes have fixed coordinates, and the coordinates of the other nodes is determined by simulating imaginary forces applied by their edges.
+The first and the last IDs in this path correspond to the tiles in the treemap, while the intermediate
+IDs are represented by auxiliary nodes. One of the issues we
+encountered is the need to determine optimal positions for these nodes. Since several paths can have
+common sub-paths, as shown in \cref{fig:bloodvessels}, the intermediate nodes should be positioned
+so as to minimize the overall path length. This motivates our application of the \emph{sticky
+force-directed graph visualization} method~\cite{FR91,Bos14} in which a sub-set of nodes have fixed
+coordinates, and the other nodes are positioned by simulating imaginary forces
+applied by their edges.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
