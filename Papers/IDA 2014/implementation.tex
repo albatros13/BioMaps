@@ -31,7 +31,6 @@ is implemented using Three.js, which provides a convenient abstraction layer ove
 \end{figure}
 
 
-
 %\subsection{Circuitboard Layers} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The circuit-board is rendered with essentially three layers,
@@ -59,10 +58,11 @@ fixes this focus, allowing the user to interact with the information in the side
 
 This direct feedback has another purpose. An ontology need not necessarily be a
 tree. In the FMA ontology, for example, different branches may join, making it a
-directed acyclic graph. A treemap, however, by its very nature, is only suitable
+directed acyclic graph. A treemap, however, is only meant
 for visualizing trees. We compensate for this by allowing the same entity to be
 represented by more than one tile at the same time. To reinforce this intuition, all
 such tiles are highlighted in unison when the mouse hovers over any one of them.
-Only one tile per entity is considered `active'. Only the active tile may be opened
-up to show its children, and only the active tile participates in the visualization
+Only one visible tile per entity may be opened up to show its children.
+Such a tile is considered `active', and only active tiles participate in the visualization
 of cross-tile connectivity data.
+
